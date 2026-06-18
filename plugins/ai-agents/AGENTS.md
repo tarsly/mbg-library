@@ -58,7 +58,7 @@ Same flow as above, run once per company. Agent Viewer supports a multi-company 
 | Marketing content batch | content-social-calendar or custom | Weekly, Monday 7:00 AM |
 | Financial report | Any finance skill | Monthly, 1st of month, 8:00 AM |
 | Sales pipeline update | bizops-lead-tracker or GHL | Daily, 8:00 AM |
-| Transaction coordinator check | real-estate-agent-pro:transaction-coordinator | Daily, 7:30 AM (active deals only) |
+| Transaction coordinator check | realtor-toolkit:transaction-coordinator | Daily, 7:30 AM (active deals only) |
 
 Schedules are created during Agent Activator (Phase 6) and Agent Reporter (Phase 4) using `mcp__scheduled-tasks__create_scheduled_task`.
 
