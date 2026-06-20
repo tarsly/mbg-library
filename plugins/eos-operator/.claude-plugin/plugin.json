@@ -1,0 +1,39 @@
+{
+  "name": "eos-operator",
+  "displayName": "EOS Operator",
+  "version": "1.0.0",
+  "description": "Run your business on EOS (the Entrepreneurial Operating System from Gino Wickman's Traction). Build your V/TO and Accountability Chart, set quarterly Rocks, track your weekly Scorecard, run Level 10 meetings with full agenda timing and IDS issue-solving, manage To-Dos and Issues, document core processes, score your team with the People Analyzer, and grade your company against the EOS Organizational Checkup. All data persists in your Cloud Brain so every meeting builds on the last.",
+  "author": {
+    "name": "MyBusinessGenie"
+  },
+  "memory_paths": {
+    "preferences": "brain/preferences/",
+    "eos": "eos/"
+  },
+  "requires_memory": true,
+  "memory_provider": "cloud-brain",
+  "industries": [
+    "all"
+  ],
+  "keywords": [
+    "eos",
+    "traction",
+    "entrepreneurial-operating-system",
+    "rocks",
+    "scorecard",
+    "level-10",
+    "l10",
+    "vto",
+    "vision-traction-organizer",
+    "accountability-chart",
+    "ids",
+    "issues",
+    "todos",
+    "core-values",
+    "gwc",
+    "people-analyzer",
+    "quarterly-pulsing",
+    "annual-planning",
+    "business-operations"
+  ]
+}
