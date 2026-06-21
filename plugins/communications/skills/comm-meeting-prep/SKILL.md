@@ -117,3 +117,9 @@ Ask: "Want me to save this prep brief? If you run Meeting-Transcript or Meeting-
 - **Unknown attendee:** Skip the research section, expand the "questions to ask your network" section, and note: "I couldn't find public information on [Name] — here's what to learn before the meeting."
 - **Multiple attendees:** Profile the most senior or most relevant attendee in depth; list others with basic details
 - **Very short meeting (15 min or less):** Compress to: 1 core message, 2 questions, 1 CTA
+
+## See Also
+
+- `/brief-pre-meeting` — full calendar-triggered pre-meeting brief that includes 30-day public activity (from `person-brief`)
+- `/brief-pre-call` — sales-call-specific pre-call brief (from `person-brief`)
+- `/brief-person-30days` — research a single attendee's last-30-days activity (from `person-brief`)
