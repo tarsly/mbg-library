@@ -156,9 +156,17 @@ SKIPPED
 - {K} below min-fit threshold
 
 NEXT
+{if Lead Pipeline dashboard exists in Cloud Brain — business-operations installed}
 - See pipeline: /bizops-lead-tracker pipeline
-- Generate outreach: /comm-email-drafter --leads-from-list "{list name}"
 - Check follow-ups: /bizops-lead-tracker follow-ups
+{else}
+- Install `business-operations` to see these leads in a pipeline dashboard
+{endif}
+{if mcp__cloud-brain check for comm-email-drafter — communications installed}
+- Generate outreach: /comm-email-drafter --leads-from-list "{list name}"
+{else}
+- Install `communications` to draft outreach emails for this list
+{endif}
 ```
 
 ## Example Usage
@@ -189,3 +197,9 @@ NEXT
 - **If `--auto-followup` is set to 0:** Treat as off. Don't schedule follow-ups for the same day as import.
 - **If user's pipeline already has 500+ active leads:** Flag: "Your pipeline already has {N} active leads. Adding {M} more may dilute focus. Consider archiving stale leads first via `/bizops-pipeline-sync`."
 - **If the source list is from buy-box mode (RE) and pipeline is set up for SaaS-style CRM:** Use the SaaS stage names anyway, but adjust default values (e.g., for RE, stage `new` = "lead added", `contacted` = "first contact made", `qualified` = "shows interest in selling", `negotiating` = "negotiating price/terms", `closed-won` = "under contract", `closed-lost` = "won't sell").
+
+## See Also
+
+- `/prospect-find`, `/prospect-bulk-list` — upstream skills that produce the lists this consumes (same plugin)
+- `/bizops-lead-tracker` — destination CRM (from `business-operations`)
+- `/bizops-pipeline-sync` — pipeline analysis on the resulting leads (from `business-operations`)

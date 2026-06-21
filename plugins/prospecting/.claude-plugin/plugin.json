@@ -1,7 +1,7 @@
 {
   "name": "prospecting",
   "displayName": "Prospecting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "B2B lead discovery and enrichment. Define your ideal customer profile (ICP), find matching contacts at scale, enrich a name into verified email and phone, generate target lists from your buy box or ICP, and hand off qualified prospects directly into your CRM pipeline. Provider-agnostic — works with Apollo, Hunter, Lusha, ZoomInfo, or Vibe Prospecting MCPs if installed, with web-search fallback when no provider is configured.",
   "author": {
     "name": "MyBusinessGenie"
@@ -32,5 +32,12 @@
     "vibe-prospecting",
     "outbound",
     "sales-intelligence"
+  ],
+  "integrates_with": [
+    { "plugin": "business-operations", "type": "workflow-handoff" },
+    { "plugin": "communications", "type": "see-also" },
+    { "plugin": "investor-profile", "type": "data-sharing" },
+    { "plugin": "person-brief", "type": "see-also" },
+    { "plugin": "real-estate-investor", "type": "data-sharing" }
   ]
 }

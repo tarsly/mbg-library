@@ -96,7 +96,7 @@ For ICP and seed-company modes:
 
 For buy-box mode (RE-specific):
 - Pull from county records or RE data sources (if user has Roor/Mojo/Skip Genie MCPs)
-- Use creative-finance scoring from `real-estate-investor` plugin if installed
+- If `real-estate-investor` plugin is installed (detected via Cloud Brain `brain/preferences/re-investor-preferences` note), apply its creative-finance scoring. Otherwise skip the scoring layer and proceed with ICP-only ranking.
 - Per-property: try to find owner name → run enrichment for contact info
 
 ### Step 4: Score, Rank, and Trim
@@ -215,3 +215,10 @@ NEXT
 - **If returned data quality is poor (e.g., >40% emails unverified):** Flag in the summary: "Quality warning: only X% verified emails. Consider switching provider or widening ICP titles."
 - **If the same person appears under two providers with different titles/companies:** Use the most recent source, mark the conflict in notes.
 - **If the user has `comm-email-drafter` and wants to draft sequences for the whole list:** Suggest they sample 5 first, draft, then scale to whole list. Don't auto-draft 200 emails.
+
+## See Also
+
+- `/prospect-find` — smaller, higher-fit lists (same plugin)
+- `/prospect-handoff` — push the list into your CRM pipeline (same plugin)
+- `/realestate-buy-box` — RE-specific buy-box mode reads this (from `investor-profile`)
+- `/comm-email-drafter` — draft outreach for the list (from `communications`)

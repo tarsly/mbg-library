@@ -182,3 +182,9 @@ NEXT STEPS
 - **If geography is given but no region/state is named:** Ask "Specific countries, states, or metros? 'US' is fine; 'global' is fine; 'undefined' won't work for list generation."
 - **If user already has 5+ ICPs:** Ask "You have {N} ICPs. Are these all active, or should we archive some? Too many ICPs usually means none are tight enough."
 - **If the user's prior ICP is RE-specific and they have `investor-profile` installed:** Note: "You have a real-estate buy box in `investor-profile`. Want this ICP to extend that, or keep them separate? Same fields can stay in sync."
+
+## See Also
+
+- `/prospect-find` — find matches for this ICP (same plugin)
+- `/prospect-bulk-list` — generate a target list from this ICP (same plugin)
+- `/realestate-buy-box` — the RE-specific cousin of ICP (from `investor-profile`)

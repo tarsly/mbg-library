@@ -198,3 +198,11 @@ NEXT
 - **If a prospect is already in `pipeline/` as a lead:** Mark them in the list with `[already in pipeline — {stage}]`. Don't duplicate.
 - **If the user passes both `--icp` and one-off filters:** Filters override ICP for that run only. Don't modify the saved ICP.
 - **If provider rate-limits / errors mid-search:** Save what was returned so far. Note: "Provider rate-limited after {N} results. Retry later with `/prospect-find --resume`."
+
+## See Also
+
+- `/prospect-icp-define` — define your ICP first (same plugin)
+- `/prospect-enrich` — fill in missing fields per contact (same plugin)
+- `/prospect-bulk-list` — campaign-sized list generation (same plugin)
+- `/prospect-handoff` — push results into your CRM pipeline (same plugin)
+- `/bizops-lead-tracker` — track these contacts as leads (from `business-operations`)

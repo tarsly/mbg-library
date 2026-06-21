@@ -144,7 +144,7 @@ If the enrichment is for a known lead in `pipeline/`, append to the lead's note 
 - {YYYY-YYYY} — {Title} at {Company}
 - ...
 
-## Buying Signals (if available)
+## Buying Signals (if returned by provider)
 
 - {YYYY-MM-DD} — {signal source} — {signal description}
 
@@ -205,3 +205,9 @@ Saved: people/{Name}  (or "Enrichment cached in Cloud Brain")
 - **If the person is in a privacy-conscious region (GDPR EU, Canada) and only personal email is available:** Note the legal context: "Found personal email but cold outreach to EU residents requires opt-in basis under GDPR. Use sparingly."
 - **If the provider returns multiple matches (same name, different companies):** Show all and ask which to enrich. Never pick silently.
 - **If the user asks for an email that's an obvious private/personal address (e.g., @gmail.com for someone at a real company):** Surface both — many founders prefer Gmail. Note which is which.
+
+## See Also
+
+- `/prospect-find` — for bulk discovery; this skill is for one-off enrichment (same plugin)
+- `/brief-person-30days` — current public activity on this person (from `person-brief`)
+- `/comm-email-drafter` — draft outreach now that you have the email (from `communications`)
