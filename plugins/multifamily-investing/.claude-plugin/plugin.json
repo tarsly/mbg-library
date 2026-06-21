@@ -1,10 +1,15 @@
 {
   "name": "multifamily-investing",
   "displayName": "Multifamily Investing",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Multifamily acquisition toolkit — pre-LOI quick screener and post-contract comprehensive underwriter for apartment deals. Covers rent roll reality checks, creative finance stacking, LOI drafting, Schedule E cross-verification, and full due diligence through Go/No-Go verdict. Saves and reads client investment preferences from memory so every analysis is calibrated to your buy box.",
   "author": {
     "name": "MyBusinessGenie"
   },
-  "keywords": ["multifamily", "apartment", "real-estate", "underwriting", "deal-analysis", "creative-finance", "due-diligence", "rent-roll"]
+  "keywords": ["multifamily", "apartment", "real-estate", "underwriting", "deal-analysis", "creative-finance", "due-diligence", "rent-roll"],
+  "integrates_with": [
+    { "plugin": "investor-profile", "type": "data-sharing" },
+    { "plugin": "real-estate-investor", "type": "see-also" },
+    { "plugin": "tax-and-audit", "type": "see-also" }
+  ]
 }
