@@ -1,0 +1,36 @@
+{
+  "name": "marketing-engineering",
+  "displayName": "Marketing Engineering",
+  "version": "1.0.0",
+  "description": "Marketing built like software. Six skills covering the full growth stack — Conversion Rate Optimization (CRO) audits and landing page generation, AI-SEO (getting cited by LLMs like Claude and ChatGPT — distinct from traditional SEO), programmatic SEO (template-driven location and keyword pages at scale), classic SEO audits, and paywall/popup component generation. All skills read from your brand-toolkit brand kit so colors, fonts, voice, and offers are consistent everywhere.",
+  "author": {
+    "name": "MyBusinessGenie"
+  },
+  "memory_paths": {
+    "preferences": "brain/preferences/",
+    "marketing": "brain/marketing/",
+    "audits": "brain/marketing/audits/",
+    "pages": "brain/marketing/pages/"
+  },
+  "requires_memory": true,
+  "memory_provider": "cloud-brain",
+  "industries": [
+    "all"
+  ],
+  "keywords": [
+    "marketing-engineering",
+    "cro",
+    "conversion-rate-optimization",
+    "ai-seo",
+    "answer-engine-optimization",
+    "geo",
+    "llmo",
+    "programmatic-seo",
+    "seo-audit",
+    "landing-page",
+    "paywall",
+    "popup",
+    "llms-txt",
+    "growth"
+  ]
+}
