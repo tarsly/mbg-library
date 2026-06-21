@@ -197,7 +197,7 @@
       "displayName": "QBO Bookkeeper",
       "source": "./plugins/qbo-bookkeeper",
       "description": "Penny is an AI-powered bookkeeper that connects directly to QuickBooks Online. Ask in plain English to pull P&L, balance sheet, and cash flow reports, review transactions, create invoices, track expenses, and look up customers and vendors. Includes guided zero-to-live onboarding that walks through Intuit Developer app creation, production approval, and connection verification. Bundles a QBO MCP server (Python) that ships with the plugin.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "quickbooks", "QBO", "bookkeeping", "accounting", "invoices",
