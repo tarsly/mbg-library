@@ -1,7 +1,7 @@
 {
   "name": "social-media-manager",
   "displayName": "Social Media Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A complete AI-powered social media management system for solo entrepreneurs and small teams. Covers the full workflow from strategy and brand setup through weekly content creation, graphic design (Canva), scheduling (Metricool), analytics, trend research, and competitor monitoring. Designed to start supervised and progressively earn full autonomy as the client builds trust in their agent.",
   "author": {
     "name": "MyBusinessGenie"
@@ -27,5 +27,10 @@
     "analytics",
     "competitor monitoring",
     "content repurposing"
+  ],
+  "integrates_with": [
+    { "plugin": "brand-toolkit", "type": "data-sharing" },
+    { "plugin": "marketing-engineering", "type": "see-also" },
+    { "plugin": "prosumer-ops", "type": "see-also" }
   ]
 }
