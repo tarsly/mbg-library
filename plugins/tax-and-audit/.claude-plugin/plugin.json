@@ -1,7 +1,7 @@
 {
   "name": "tax-and-audit",
   "displayName": "Tax & Audit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tax strategy and audit-readiness for small business owners and real estate investors. Five skills: quarterly estimate calculator (Q1-Q4 federal + state), cost segregation analysis for RE properties, entity structure recommendation (LLC vs S-Corp vs C-Corp), audit-prep document checklist and readiness scorecard, and a deduction finder that scans QuickBooks Online data for missed deductions. Integrates with the qbo-bookkeeper plugin for live transaction data. NOT TAX ADVICE — this plugin organizes and educates; always confirm with a CPA before filing.",
   "author": {
     "name": "MyBusinessGenie"
@@ -34,5 +34,11 @@
     "deductions",
     "1031-exchange",
     "depreciation"
+  ],
+  "integrates_with": [
+    { "plugin": "business-operations", "type": "data-sharing" },
+    { "plugin": "investor-profile", "type": "data-sharing" },
+    { "plugin": "qbo-bookkeeper", "type": "mcp-cascade" },
+    { "plugin": "realtor-toolkit", "type": "workflow-handoff" }
   ]
 }

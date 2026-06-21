@@ -295,3 +295,9 @@ Full analysis: brain/tax/Cost Seg — {property} — {date}
 - **If property is held by a partnership (MMLLC) or S-Corp:** Note that the loss flows through K-1 — partner's individual situation determines how it's used. Same analysis applies but K-1 timing matters.
 - **If user is asking about cost seg on a property they're selling:** Push back — recapture eats much of the benefit. Suggest 1031 exchange instead, or accept that cost seg is best deployed at acquisition with multi-year hold.
 - **If TCJA bonus depreciation rules might change:** Note the legislative risk — current 60/40/20 phasedown could be reinstated to 100% by Congress. Don't model speculation.
+
+## See Also
+
+- `/tax-quarterly-estimate` — apply the accelerated depreciation to current-year quarterly tax (same plugin)
+- `/realtor-1031-exchange-tracker` — 1031 in flight changes cost seg math (from `realtor-toolkit`)
+- `/realestate-buy-box` — RE Pro and entity context (from `investor-profile`)

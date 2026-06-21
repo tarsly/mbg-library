@@ -247,7 +247,7 @@ Full calc: brain/tax/Quarterly Estimate — {year} — {quarter}
 
 **User:** "What's my Q3 estimated tax payment?"
 
-**AI:** Loads tax-preferences. Pulls YTD data from QBO if available. Runs three methods. Returns recommended payment + flags.
+**AI:** Loads tax-preferences. Pulls YTD data from QBO if `qbo-bookkeeper` is installed (detected via `mcp__qbo__*` tools); otherwise asks user for YTD totals inline. Runs three methods. Returns recommended payment + flags.
 
 **User:** "/tax-quarterly-estimate --quarter Q4 --ytd-income 285000 --ytd-expenses 120000 --filing-status mfj --state UT --prior-year-tax 32000"
 
@@ -267,4 +267,10 @@ Full calc: brain/tax/Quarterly Estimate — {year} — {quarter}
 - **If user has S-Corp with no W2 (no reasonable salary):** Strongly flag — IRS will reclassify distributions to wages if no W2.
 - **If state-specific add-backs or credits would change the answer materially:** Note: "State tax estimate is a simplification. Your state has {add-back X} that this skill doesn't model. Confirm with CPA."
 - **If user wants AMT calculation:** Note: "AMT post-TCJA rarely triggers for most filers. If your income > $1M or you have major ISO exercise, talk to CPA — this skill doesn't model AMT."
-- **If user crosses an entity-structure threshold:** Cross-link `/tax-entity-structure` — "At this income, S-Corp election might save ${X}/year."
+- **If user crosses an entity-structure threshold:** Append to the output: `See also: /tax-entity-structure — at this income level, an S-Corp election might save ~${X}/year.`
+
+## See Also
+
+- `/tax-deduction-finder` — find missed deductions before computing the quarter (same plugin)
+- `/tax-entity-structure` — evaluate S-Corp / C-Corp election (same plugin)
+- `/qbo-bookkeeper` — YTD income data source (from `qbo-bookkeeper`)

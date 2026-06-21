@@ -127,7 +127,7 @@ Based on the data and `tax preferences`:
 - **Defer income** — if cash basis, push December invoices to January
 - **Section 199A QBI** — verify QBI calculation if income is below phaseout
 - **Real estate Section 469 elections** — RE Pro, aggregating activities, grouping rentals
-- **Cost segregation** — if you bought property this year and haven't done cost seg, cross-link
+- **Cost segregation** — if you bought property this year and haven't done cost seg, append to the output: `See also: /tax-cost-segregation [property address] to estimate the tax savings.`
 
 ### Step 5: Categorize Findings by Impact
 
@@ -269,3 +269,10 @@ Full report: brain/tax/Deduction Review — {period}
 - **If user has S-Corp and book shows $0 owner W2 wages:** CRITICAL flag — IRS will reclassify distributions to wages if no reasonable salary. Cross-link `/tax-entity-structure`.
 - **If user is on cash basis and has December invoices:** Surface defer-income opportunity. Note: must be consistent — can't cherry-pick.
 - **If user has multiple businesses on one set of books:** Recommend separating. Aggregated bookkeeping makes audits painful.
+
+## See Also
+
+- `/tax-quarterly-estimate` — fold findings into this quarter's payment (same plugin)
+- `/tax-cost-segregation` — major missed deduction on RE properties (same plugin)
+- `/tax-entity-structure` — surface findings flag S-Corp election threshold (same plugin)
+- `/qbo-bookkeeper` — live transaction data source (from `qbo-bookkeeper`)

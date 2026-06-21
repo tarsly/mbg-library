@@ -261,3 +261,9 @@ Full analysis: brain/entities/Entity Recommendation — {date}
 - **If user mentions Series LLC:** Confirm state allows it. Note legal-protection status is still being tested in some courts.
 - **If RE Pro status is in play:** Note that entity choice doesn't change RE Pro status. Owner-level test. Affects loss flow-through though.
 - **If user is in a community property state and married:** Note that disregarded SMLLC + community property has special rules.
+
+## See Also
+
+- `/tax-quarterly-estimate` — model the tax impact of the recommended structure (same plugin)
+- `/tax-deduction-finder` — find S-Corp specific opportunities (same plugin)
+- `/bizops-financial-snapshot` — read prior P&L to inform the decision (from `business-operations`)

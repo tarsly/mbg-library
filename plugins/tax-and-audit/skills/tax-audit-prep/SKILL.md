@@ -284,3 +284,9 @@ REMINDERS
 - **If audit involves criminal exposure (fraud, abusive shelters, FBAR willfulness):** Tax attorney territory, not CPA. CPAs don't have attorney-client privilege; communications can be compelled.
 - **If user has multiple years under examination:** Cross-reference findings — examiners look for patterns. A weakness in year 1 may propagate.
 - **If user is RE Pro and hours are being challenged:** Reconstructed logs are weak evidence. Contemporaneous calendar, email, contractor invoices, MLS access logs, broker statements help. Note: courts are skeptical of reconstructions.
+
+## See Also
+
+- `/tax-deduction-finder` — surface miscategorized expenses before the audit (same plugin)
+- `/tax-cost-segregation` — relevant if cost seg is being audited (same plugin)
+- `/bizops-sop-builder` — document going-forward processes so the next audit is easier (from `business-operations`)
