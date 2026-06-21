@@ -122,7 +122,7 @@
       "displayName": "Brand Toolkit",
       "source": "./plugins/brand-toolkit",
       "description": "A complete brand identity and analysis system for small business owners and entrepreneurs. Set up your brand kit once — colors, fonts, logo, and voice — and get a professional brand board PDF. Run quarterly brand audits to measure your online presence, identify positioning gaps, and get a data-backed 30-day improvement plan. Brand data saved to your Cloud Brain automatically applies to all document and content skills.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "brand", "branding", "brand-kit", "brand-audit", "online-presence",

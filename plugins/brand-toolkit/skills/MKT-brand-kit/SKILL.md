@@ -380,3 +380,11 @@ If the user says "update my brand" or "change my [brand element]":
 3. Apply changes to both Cloud Brain record and local JSON
 4. Offer to regenerate brand board
 5. Confirm: "Updated. Your [element] is now [new value] — applied everywhere."
+
+## See Also
+
+- `/MKT-brand-audit` — quarterly brand audit reads this brand kit (same plugin)
+- `/mkt-landing-page` — generates landing pages using this brand voice and palette (from `marketing-engineering`)
+- `/mkt-paywall-popup` — popups in your brand colors (from `marketing-engineering`)
+- `/pro-screen-polish` — intro/outro cards use these colors and logo (from `prosumer-ops`)
+- `/pro-article-illustrate` — AI illustrations in your palette (from `prosumer-ops`)
