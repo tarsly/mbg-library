@@ -258,3 +258,11 @@ grep -rn 'if available' plugins/*/skills/*/SKILL.md && echo "FOUND 'if available
 Plugin-marketplace economics reward composition. A user who installs three integrated plugins gets more value than the sum of three siloed plugins — and is more likely to come back for the fourth. But that only works if each install is a clear upgrade, never a regression.
 
 The five-type pattern + explicit fallbacks + `integrates_with` metadata is the lowest-overhead way to keep that contract. Follow it.
+
+---
+
+## Cross-Framework Note
+
+Cross-link slash commands like `/bizops-lead-tracker` are a Claude Code convention. When the marketplace is exported to other frameworks (Cursor, Codex CLI, Anthropic API, Manus) via `scripts/export/`, the exporters translate these references to prose (`the bizops-lead-tracker skill`) since other frameworks don't have a 1:1 slash-command equivalent.
+
+You don't need to do anything special — write your cross-links as Claude Code slash commands. The exporters handle the translation. See `EXPORTING-TO-OTHER-FRAMEWORKS.md` for the full cross-framework story.

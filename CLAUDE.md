@@ -80,3 +80,25 @@ Before committing changes to a plugin:
 ## Trademark-Sensitive Plugins
 
 For plugins that build on a licensed framework (e.g., `eos-operator` uses EOS Worldwide's trademarked terminology), include a disclaimer in `README.md` and avoid bundling logos or claiming certification.
+
+---
+
+## Cross-Framework Exports (Optional `portable` Field)
+
+The marketplace's source-of-truth is Claude Code's format. Exporters under `scripts/export/` ship the same skills to Cursor, Codex CLI, Anthropic API, and Manus.im. See `EXPORTING-TO-OTHER-FRAMEWORKS.md` for the full pattern.
+
+When authoring a new skill, you MAY add an optional `portable` field to the YAML frontmatter:
+
+```yaml
+---
+name: my-skill
+description: "..."
+portable: all   # or 'claude' (Claude Code only) or 'prose-only'
+---
+```
+
+- `all` (default) — exports to every target framework
+- `claude` — Claude-Code-specific (relies on `TodoWrite`, complex slash-command flows, etc.) — excluded from non-Claude exports
+- `prose-only` — body is useful as reference but the skill doesn't fully function outside Claude Code
+
+If you omit the field, it defaults to `all`. Claude Code ignores the field — it's read only by the export scripts.
