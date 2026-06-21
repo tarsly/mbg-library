@@ -232,3 +232,9 @@ Saved: {folder}/{Channel} — {Video Title}
 - **If video is in a non-English language:** Use `--language` flag. Fall back to YouTube's auto-translate subs if needed. Note translation quality limitations.
 - **If summary generation fails (transcript too short / too unclear):** Save transcript without summary. Note: "Summary skipped due to transcript quality. Read directly."
 - **If user has `mcp__cloud-brain__write_note` but the file path conflicts with an existing note:** Append `(2)`, `(3)` suffix automatically. Don't overwrite.
+
+## See Also
+
+- `/comm-plaud-sync` — for personal voice recordings (from `communications`)
+- `/pro-apple-notes-search` — search across both sources at once (same plugin)
+- `/comm-meeting-transcript` — for meeting recordings rather than YouTube (from `communications`)

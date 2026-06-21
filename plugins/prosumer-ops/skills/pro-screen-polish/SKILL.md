@@ -174,7 +174,7 @@ Metadata: knowledge-base/recordings/Polished — {input} — {date}
 
 **User:** "/pro-screen-polish ~/Movies/Recordings/demo.mov --captions off --intro 'MBG Demo' --outro 'mybusinessgenie.ai'"
 
-**AI:** Specific input. No captions. Branded intro/outro from brand-toolkit if available, else neutral. Saves.
+**AI:** Specific input. No captions. Branded intro/outro from `brand-toolkit` if installed (detected via `brain/brand/brand-kit` Cloud Brain note), else neutral text cards. Saves.
 
 **User:** "Just speed up the idle parts — don't crop or caption"
 
@@ -196,3 +196,9 @@ Metadata: knowledge-base/recordings/Polished — {input} — {date}
 - **If render is very slow:** Note duration estimate before starting. Recommend HEVC for smaller / slower or H.264 for faster / larger.
 - **If brand-toolkit isn't installed and user wants branded intro/outro:** Use neutral text cards. Note: "Install `brand-toolkit` for branded intro/outro with your colors and logo."
 - **If user wants 4K output from 1080p input:** Refuse upscale — note quality loss. Use original resolution.
+
+## See Also
+
+- `/pro-screen-record` — record the screen first (same plugin)
+- `/brandtoolkit-brand-kit` — provides the colors and logo for intro/outro cards (from `brand-toolkit`)
+- `/sm-content-batch` — schedule the polished video for social distribution (from `social-media-manager`)

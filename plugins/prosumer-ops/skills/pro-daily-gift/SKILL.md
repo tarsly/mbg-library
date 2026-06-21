@@ -222,3 +222,10 @@ Saved: knowledge-base/gifts/Daily Gift — {date}
 - **If user wants the same gift twice (dedup):** Check `knowledge-base/gifts/` for prior gifts within 30 days; pick a different one if duplicate.
 - **If a gift would conflict with avoid-themes preferences:** Re-roll. Don't push politics / hype / news if user said avoid.
 - **If user wants longer or shorter gift:** Override length. Don't deliver a 500-word "quote".
+
+## See Also
+
+- `/pro-article-illustrate` — generate the illustration when gift type is image (same plugin)
+- `/brain-mantras` — affirmations counterpart from your own brain (from `brain-coach`)
+- `/comm-imessage` — deliver the gift to family / partner (from `communications`)
+- `/comm-whatsapp-notifier` — WhatsApp delivery (from `communications`)

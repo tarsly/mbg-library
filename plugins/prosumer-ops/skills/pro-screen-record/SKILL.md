@@ -228,3 +228,8 @@ Saved metadata: knowledge-base/recordings/Recording — {timestamp}
 - **If recording fails partway (crash, killed):** Some tools leave a partial file. Check size + try playback. If unplayable, suggest re-recording with shorter duration / lower bitrate.
 - **If user requested `--duration` but command exits early:** Check process; may be a permission issue.
 - **If on Apple Silicon vs. Intel:** `h264_videotoolbox` is faster on Apple Silicon. ffmpeg fallback should pick that automatically. Note in performance hints.
+
+## See Also
+
+- `/pro-screen-polish` — auto-zoom, captions, vertical export on the resulting file (same plugin)
+- `/comm-meeting-transcript` — for already-recorded Zoom / meeting files (from `communications`)

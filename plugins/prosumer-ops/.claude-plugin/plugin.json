@@ -1,7 +1,7 @@
 {
   "name": "prosumer-ops",
   "displayName": "Prosumer Ops",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Six prosumer micro-workflows that turn macOS + Cloud Brain + Claude into a knowledge and content production stack. Ingest any YouTube video to a Cloud Brain note with transcript, summary, and citations. Search Apple Notes semantically and by keyword. Record the macOS screen with system audio (the thing QuickTime can't). Polish raw recordings with auto-zoom, captions, and 9:16 vertical export. Generate a daily gift (quote / article / illustration). Create AI illustrations for articles. Built for solopreneurs who run their entire knowledge stack on macOS.",
   "author": {
     "name": "MyBusinessGenie"
@@ -31,5 +31,12 @@
     "illustration",
     "content-production",
     "knowledge-management"
+  ],
+  "integrates_with": [
+    { "plugin": "brain-coach", "type": "see-also" },
+    { "plugin": "brand-toolkit", "type": "data-sharing" },
+    { "plugin": "communications", "type": "see-also" },
+    { "plugin": "marketing-engineering", "type": "see-also" },
+    { "plugin": "social-media-manager", "type": "see-also" }
   ]
 }

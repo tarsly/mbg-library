@@ -171,3 +171,9 @@ NEXT
 - **If user wants to bulk-promote multiple notes:** Confirm count, then loop. Don't auto-promote large batches without confirmation — Cloud Brain will get noisy.
 - **If a note has attachments (photos, sketches):** Note: "Note has {N} attachments — Apple Notes API can't transfer them. Promoted note will reference the original."
 - **If user is on iCloud sync delay:** Notes created in last few minutes may not be searchable. Suggest waiting or pulling specifically.
+
+## See Also
+
+- `/pro-youtube-ingest` — pull YouTube content into Cloud Brain (same plugin)
+- `/brain-recall` — Cloud-Brain-only search with smart fallbacks (from `brain-coach`)
+- `/comm-plaud-sync` — sync PLAUD voice notes into Cloud Brain (from `communications`)

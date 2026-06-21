@@ -18,7 +18,7 @@ allowed-tools:
 
 Turn any article into a visual asset set. Reads the source, identifies 1-N illustration "moments" (hero image + key section transitions), generates each image, returns paths and metadata. Provider-agnostic — works with whichever image-generation MCP is installed.
 
-Uses `brand-toolkit` for color palette + visual style consistency if available.
+Uses `brand-toolkit` for color palette + visual style consistency if installed (detected via the `brain/brand/brand-kit` Cloud Brain note).
 
 ## When This Skill Applies
 
@@ -79,7 +79,7 @@ Cap at `--count` (default: hero only = 1; or 3-5 for full illustration set).
 For each illustration moment, generate a prompt that includes:
 - Subject / scene description
 - Composition (e.g., "isometric", "flat illustration", "photorealistic")
-- Color palette (from brand-toolkit if available)
+- Color palette (from `brand-toolkit` if installed, else editorial neutrals)
 - Style (from brand-toolkit visual style, or `--style` override, or default "clean editorial illustration")
 - Avoid list (text in image, faces if avoiding likeness, etc.)
 - Aspect ratio per `--aspect`
@@ -207,3 +207,9 @@ Saved: knowledge-base/illustrations/Illustrations — {slug} — {date}
 - **If brand-toolkit isn't installed:** Use a neutral palette. Note: "No brand kit found — used editorial neutrals. Install `brand-toolkit` for branded visuals."
 - **If MCP is slow (>30s per image):** Notify user, run in foreground with status updates. Don't time out silently.
 - **If user wants commercial-use guarantees:** Note model-specific terms — DALL-E/OpenAI allow commercial use of user-generated content; Midjourney requires Pro plan; Replicate/Stability vary by model. Recommend checking before publishing.
+
+## See Also
+
+- `/pro-daily-gift` — uses this skill for illustration-type gifts (same plugin)
+- `/brandtoolkit-brand-kit` — provides the palette and visual style (from `brand-toolkit`)
+- `/mkt-landing-page` — illustrations belong on landing pages this generates (from `marketing-engineering`)
