@@ -1,7 +1,7 @@
 {
   "name": "person-brief",
   "displayName": "Person Brief",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pre-meeting and pre-call intelligence for busy professionals. Synthesizes the last 30 days of activity on a person across Reddit, X, Hacker News, YouTube, GitHub, and the open web — then merges that signal with your Cloud Brain history of the relationship to produce a one-page brief before every important conversation. Designed to run as a calendar-triggered prep agent so you walk into every meeting already informed.",
   "author": {
     "name": "MyBusinessGenie"
@@ -30,5 +30,12 @@
     "youtube",
     "github",
     "calendar-agent"
+  ],
+  "integrates_with": [
+    { "plugin": "business-operations", "type": "data-sharing" },
+    { "plugin": "communications", "type": "see-also" },
+    { "plugin": "market-intelligence", "type": "see-also" },
+    { "plugin": "prospecting", "type": "see-also" },
+    { "plugin": "zoom-meetings", "type": "mcp-cascade" }
   ]
 }

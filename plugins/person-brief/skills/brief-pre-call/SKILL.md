@@ -234,3 +234,11 @@ Full brief: calendar/Pre-Call Brief — {name} — {date}
 - **If deal is in `closed-lost`:** Confirm: "This deal is marked closed-lost. Are you running a win-back call?" Generate a win-back-specific brief if yes.
 - **If prospect's recent signal is genuinely empty:** Lean entirely on CRM history. Note: "No public signal in 30 days — relying on your prior conversations."
 - **If the user's offering / preferences aren't set:** Run the pre-flight ask. Cannot generate a useful objection list without knowing what you sell.
+
+## See Also
+
+- `/brief-pre-meeting` — non-sales meeting prep (same plugin)
+- `/brief-person-30days` — research the prospect without sales framing (same plugin)
+- `/bizops-lead-tracker` — track the deal through pipeline (from `business-operations`)
+- `/comm-negotiation-prep` — deeper objection-handling and BATNA work (from `communications`)
+- `/prospect-enrich` — enrich the prospect's contact data before the call (from `prospecting`)

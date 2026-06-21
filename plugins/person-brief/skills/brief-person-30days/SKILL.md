@@ -219,4 +219,11 @@ Full brief: {cloud brain link or note title}
 - **If the person is a public figure with overwhelming volume:** Cap each source at top 10 by engagement, note the truncation in the brief: "Signal volume was high — showing top 10 per source. Widen scope with --deep."
 - **If the user asks for a brief on themselves:** Run it — useful for personal brand audits. Add a note: "This is a brief on yourself. Want this as a personal brand check-in instead? Run `/personal-brand-audit`."
 - **If Cloud Brain save fails:** Report the error, present the brief inline in chat so it's not lost. Suggest retry.
-- **If the brief is for a sales call and the user has a CRM lead for this person:** Cross-reference with `bizops-lead-tracker` — pull deal stage, value, last interaction, and include in the "What This Means" section.
+- **If the brief is for a sales call and the user has a CRM lead for this person:** If `business-operations` is installed (detected via Cloud Brain dashboard note `Lead Pipeline`), read the lead via `mcp__cloud-brain__search_notes` and include deal stage, value, and last interaction in the "What This Means" section. Otherwise skip this enrichment.
+
+## See Also
+
+- `/brief-pre-meeting` — full pre-meeting prep that includes this brief plus Cloud Brain history (same plugin)
+- `/brief-pre-call` — sales-call-specific game plan that uses this brief (same plugin)
+- `/research-person` — static profile / biography (from `market-intelligence`)
+- `/bizops-lead-tracker` — track this prospect in your pipeline (from `business-operations`)

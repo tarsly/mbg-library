@@ -52,7 +52,7 @@ User input forms:
 - Meeting title or topic ("Acme call")
 - Specific time ("10am tomorrow")
 - Calendar invite paste (parse subject, time, attendees, agenda)
-- Zoom link (use zoom-meetings skill if available to pull metadata)
+- Zoom link (if `zoom-meetings` plugin is installed, detected via `mcp__zoom__*` tools, use it to pull metadata; otherwise parse the link manually for ID + topic)
 - Attendee names ("meeting with Sarah and Marcus")
 
 Output of this step: structured meeting object — `{title, time, attendees: [{name, email, company?}], agenda?}`.
@@ -94,7 +94,7 @@ Generate the brief with these sections:
 
 - `write_note` → title: `Meeting Brief — {meeting title} — {YYYY-MM-DD}`, folder: `calendar`, tags: `["meeting-brief", "{date}"]`
 - Render condensed version in chat (see Output Format)
-- If user has the `comm-meeting-prep` skill from communications plugin, cross-link
+- If the `communications` plugin is installed (detected via Cloud Brain `brain/preferences/communications-preferences` note existing), append to the output: `See also: /comm-meeting-prep for deeper Cloud-Brain-history-only briefs (from communications)`. Otherwise omit the line.
 
 ## Data Structure
 
@@ -209,4 +209,11 @@ Full brief: calendar/Meeting Brief — {title} — {date}
 - **If 30-day public signal is empty across the board:** Brief still ships with the meeting basics + Cloud Brain history + a flag: "Public activity was low — this person may be heads-down or private."
 - **If the meeting is in <15 minutes:** Drop to quick depth automatically and warn: "Less than 15 minutes — running quick brief only. Run again later for deeper context."
 - **If the user already has a meeting brief saved within last 24 hours for the same attendees:** Read the existing brief, only add deltas (new public activity since brief was generated, new Cloud Brain notes). Don't rebuild from scratch.
-- **If zoom-meetings plugin is installed and a Zoom link is provided:** Use it to pull historical call data with the same attendees (transcripts, prior agendas, chat logs).
+- **If zoom-meetings plugin is installed and a Zoom link is provided:** Use it to pull historical call data with the same attendees (transcripts, prior agendas, chat logs). Detected via `mcp__zoom__*` tool visibility. If not installed, skip the historical-call pull and proceed with Cloud Brain context only.
+
+## See Also
+
+- `/brief-person-30days` — single-person research without meeting framing (same plugin)
+- `/brief-pre-call` — sales-call-specific prep with CRM stage + objections (same plugin)
+- `/comm-meeting-prep` — Cloud-Brain-history-only meeting prep (from `communications`)
+- `/comm-zoom-debrief` — post-meeting debrief counterpart (from `zoom-meetings`)
