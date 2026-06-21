@@ -1,12 +1,17 @@
 {
   "name": "mbg-admin",
   "displayName": "MBG Admin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Ongoing system health for MBG clients. Three admin skills that keep your goals front of mind, your AI platform up to date, and your results visible on your cloud dashboard. Goals Pulse is a 5–10 minute weekly alignment check-in. Update Blueprint checks for and applies platform updates. Publish Dashboard sends any skill output to your mybusinessgenie.ai dashboard.",
   "author": {
     "name": "MyBusinessGenie"
   },
   "keywords": ["admin", "maintenance", "goals-pulse", "update-blueprint", "publish-dashboard", "check-in", "weekly-review", "goal-alignment", "platform-update", "system-health", "recurring", "dashboard", "cloud-dashboard"],
+  "integrates_with": [
+    { "plugin": "ai-agents", "type": "see-also" },
+    { "plugin": "brain-coach", "type": "see-also" },
+    { "plugin": "eos-operator", "type": "see-also" }
+  ],
   "connectors": [
     {
       "id": "cloud-dashboard",
