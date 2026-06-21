@@ -1,7 +1,7 @@
 {
   "name": "market-intelligence",
   "displayName": "Market Intelligence",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A suite of four AI-powered research skills for business intelligence. Run competitor analyses, market sizing reports, strategic SWOT assessments, deep-dive topic research, and individual person profiles — all sourced from live web data, saved to your cloud brain, and personalized to your business over time. Designed for entrepreneurs, investors, and business operators who make high-stakes decisions and need fast, reliable intelligence.",
   "author": { "name": "MyBusinessGenie" },
   "keywords": [
@@ -17,5 +17,9 @@
     "strategic analysis",
     "person research",
     "deep research"
+  ],
+  "integrates_with": [
+    { "plugin": "person-brief", "type": "see-also" },
+    { "plugin": "prospecting", "type": "see-also" }
   ]
 }
