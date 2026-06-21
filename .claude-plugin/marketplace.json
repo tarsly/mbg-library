@@ -296,6 +296,21 @@
         "1031-exchange", "depreciation"
       ],
       "category": "finance"
+    },
+    {
+      "name": "prosumer-ops",
+      "displayName": "Prosumer Ops",
+      "source": "./plugins/prosumer-ops",
+      "description": "Six prosumer micro-workflows that turn macOS + Cloud Brain + Claude into a knowledge and content production stack. Ingest any YouTube video to a Cloud Brain note with transcript, summary, and citations. Search Apple Notes semantically and by keyword. Record the macOS screen with system audio (the thing QuickTime can't). Polish raw recordings with auto-zoom, captions, and 9:16 vertical export. Generate a daily gift (quote / article / illustration). Create AI illustrations for articles. Skills: pro-youtube-ingest, pro-apple-notes-search, pro-screen-record, pro-screen-polish, pro-daily-gift, pro-article-illustrate.",
+      "version": "1.0.0",
+      "author": { "name": "MyBusinessGenie" },
+      "keywords": [
+        "prosumer", "macos", "youtube-transcript", "yt-dlp", "apple-notes",
+        "screen-recording", "screencapturekit", "screen-studio",
+        "daily-gift", "illustration", "content-production",
+        "knowledge-management"
+      ],
+      "category": "productivity"
     }
   ]
 }
