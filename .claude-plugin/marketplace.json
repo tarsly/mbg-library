@@ -228,7 +228,7 @@
       "displayName": "Brain Coach",
       "source": "./plugins/brain-coach",
       "description": "Life-coach-framed Cloud Brain tooling. Seven brain rituals that turn your Cloud Brain into a daily performance system: capture any thought (brain-dump), search everything with smart fallbacks (brain-recall), journal in five modes (brain-journal), close the day with a structured reflection (brain-evening), write your goals daily (brain-daily-goals), drive an affirmations read-aloud session (brain-mantras), and track your non-negotiables with streaks (brain-habits). All data persists in Cloud Brain.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "brain-dump", "journal", "gratitude", "affirmations", "mantras",
