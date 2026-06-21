@@ -1,10 +1,17 @@
 {
   "name": "investor-profile",
   "displayName": "Investor Profile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Real estate investor identity and network tools — define your buy box, define your lending criteria, and manage a buyer network. Generates professional shareable infographics for Instagram, LinkedIn, and Facebook. Saves all profiles to your persistent brain so the REInvestor Toolbox can score every new deal against your personal criteria automatically.",
   "author": {
     "name": "MyBusinessGenie"
   },
-  "keywords": ["buy-box", "lending-box", "investor-profile", "network", "creative-finance", "gator", "private-money", "subject-to", "seller-finance", "infographic", "wholesaler", "buyer-network"]
+  "keywords": ["buy-box", "lending-box", "investor-profile", "network", "creative-finance", "gator", "private-money", "subject-to", "seller-finance", "infographic", "wholesaler", "buyer-network"],
+  "integrates_with": [
+    { "plugin": "multifamily-investing", "type": "data-sharing" },
+    { "plugin": "prospecting", "type": "data-sharing" },
+    { "plugin": "real-estate-investor", "type": "data-sharing" },
+    { "plugin": "rv-park-investing", "type": "data-sharing" },
+    { "plugin": "tax-and-audit", "type": "data-sharing" }
+  ]
 }
