@@ -53,7 +53,7 @@ If `brand-toolkit` is installed, audit uses the brand voice and offer context fo
 - Form fields and length
 - Images / video alt text
 - Trust signals (logos, testimonials, badges, security indicators)
-- Page weight indicators (if available via the response)
+- Page weight indicators (if returned by the response headers)
 - Meta description, OG tags
 
 If page is JS-heavy and WebFetch returns mostly markup, note the limitation and continue with what's visible.
@@ -229,3 +229,10 @@ Full audit: brain/marketing/audits/CRO Audit — {url} — {date}
 - **If user has `brand-toolkit` brand kit set up:** Use its voice rules when scoring copy ("does the copy match brand voice?"). Reference brand colors / typography for visual scoring.
 - **If page has unusual format (one-pager scroll, interactive demo, video-first):** Adapt scoring — note that traditional CRO heuristics apply less. Score based on intent the page is built for.
 - **If score is below 400/1000:** Recommend a full redesign rather than incremental fixes. Note clearly: "Below 400 means most fixes are rearranging deck chairs. Consider rewriting the page from scratch."
+
+## See Also
+
+- `/mkt-landing-page` — generate replacement copy for the weak sections (same plugin)
+- `/mkt-paywall-popup` — add the popup the audit flagged as missing (same plugin)
+- `/mkt-seo-audit` — traditional SEO counterpart (same plugin)
+- `/brandtoolkit-brand-audit` — broader brand-level audit (from `brand-toolkit`)

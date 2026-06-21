@@ -102,7 +102,7 @@ For the chosen variant, generate each section. Each section follows these rules:
 
 ### Step 4: Voice Application
 
-Apply brand voice from `brand-toolkit` if available:
+Apply brand voice from `brand-toolkit` if installed (detected via the `brain/brand/brand-kit` Cloud Brain note from step 2):
 - Pacing (short punchy sentences vs. flowing)
 - Vocabulary (avoid words flagged as off-brand)
 - Personality (formal / casual / authoritative / playful)
@@ -278,3 +278,11 @@ VALUE PROPS
 - **If user has both `brand-toolkit` voice rules AND CLAUDE.md style preferences:** Brand kit wins for the page (it's the brand the page represents), but flag any conflicts: "Your brand voice differs from your personal TARS voice. Used brand voice for the page — confirm if you want it more TARS."
 - **If `--from-audit` references a non-existent audit:** List recent audits and ask which.
 - **If user wants the page in a specific framework (Next.js, Webflow, Notion):** Suggest the spec is framework-agnostic markdown. Offer to translate into MDX or Webflow CSS variables in a follow-up.
+
+## See Also
+
+- `/mkt-cro-audit` — audit this page after it goes live (same plugin)
+- `/mkt-paywall-popup` — add the email-capture / exit-popup layer (same plugin)
+- `/mkt-ai-seo` — make the page citable by LLMs (same plugin)
+- `/brandtoolkit-brand-kit` — set up the brand voice this skill reads (from `brand-toolkit`)
+- `/sm-content-batch` — schedule launch posts after the page is live (from `social-media-manager`)

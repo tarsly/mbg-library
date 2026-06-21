@@ -240,4 +240,10 @@ Full spec: brain/marketing/pages/Popup — {type} — {offer} — {date}
 - **If user wants to skip dismissal (no close button):** Refuse. Dark patterns get penalized by browsers and lose long-term trust.
 - **If popup conflicts with cookie consent (EU):** Sequence them — consent first, then popup. Note in spec.
 - **If user is targeting mobile-heavy audience:** Default to slide-in or banner over full modal — mobile modals are friction-heavy.
-- **If `mkt-cro-audit` flagged need for the popup:** Cross-reference the audit's recommendation and tailor the copy accordingly.
+- **If `mkt-cro-audit` flagged need for the popup:** Read the audit note from `brain/marketing/audits/` and tailor the copy to address the specific weak dimensions the audit identified.
+
+## See Also
+
+- `/mkt-cro-audit` — identify which popups your page actually needs (same plugin)
+- `/mkt-landing-page` — landing page that this popup overlays (same plugin)
+- `/brandtoolkit-brand-kit` — colors and voice the popup uses (from `brand-toolkit`)

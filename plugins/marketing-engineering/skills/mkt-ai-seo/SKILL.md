@@ -100,7 +100,7 @@ Generates a properly-formatted `llms.txt` per the emerging spec (https://llmstxt
 ```
 
 Pull pages by:
-1. Fetching brand sitemap if available
+1. Fetching brand sitemap if reachable at `/sitemap.xml`
 2. Top pages from existing brand kit / preferences
 3. Asking user to confirm before publishing
 
@@ -298,3 +298,10 @@ Full output: brain/marketing/audits/...
 - **If user wants to compete with a much larger brand in queries:** Be honest — AI-SEO can't make a 10-person company outrank Apple in 6 months. Recommend niche-specific queries instead ("Best Claude Code plugins for real estate investors" beats "Best AI tools").
 - **If JSON-LD schema is complex:** Provide a minimal valid version; recommend Google's Rich Results Test for verification.
 - **If user wants ongoing tracking:** Recommend re-running audit quarterly. Save audits with date-suffixed names for diff comparison.
+
+## See Also
+
+- `/mkt-seo-audit` — traditional SEO audit (same plugin)
+- `/mkt-programmatic-seo` — generate AI-SEO-optimized pages at scale (same plugin)
+- `/mkt-landing-page` — landing pages that get cited (same plugin)
+- `/brandtoolkit-brand-kit` — voice that LLMs can quote (from `brand-toolkit`)

@@ -249,15 +249,21 @@ Full audit: brain/marketing/audits/SEO Audit — {url} — {date}
 
 **User:** "My organic traffic dropped 30% last month — diagnose"
 
-**AI:** Audit + ask user to paste GSC data if available. Cross-reference fix list with recent changes (git log of site repo if accessible). Suggest top 3 hypotheses (algorithm update, indexation issue, content quality issue).
+**AI:** Audit + ask user to paste GSC data if they have access. Cross-reference fix list with recent changes (git log of site repo if accessible). Suggest top 3 hypotheses (algorithm update, indexation issue, content quality issue).
 
 ## Error Handling
 
-- **If site is JS-only and WebFetch returns empty:** Recommend running through playwright MCP if available, or pasting rendered HTML. Limited audit possible from server response alone.
+- **If site is JS-only and WebFetch returns empty:** Recommend running through playwright MCP if installed (detected via `mcp__playwright__*` tools), or pasting rendered HTML. Limited audit possible from server response alone.
 - **If site is behind auth:** Audit publicly-accessible portion only.
 - **If user wants ranking data and GSC is unavailable:** Use third-party SERP checks if accessible; otherwise be honest about limits.
 - **If competitor URLs given but pages are gated/paywalled:** Audit what's visible, note limitations.
 - **If site has zero schema:** That's a major opportunity — call out as top win.
 - **If site has aggressive `noindex` / `disallow` settings:** Check whether intentional (staging) or accident (live site blocked).
 - **If user asks for tactics the audit didn't surface (link building, etc.):** Note: "This audit covers technical, on-page, content. Off-page (links, citations, mentions) is a separate workstream — recommend running a backlink audit via Ahrefs/Semrush exports."
-- **If `mkt-ai-seo` is installed, cross-link:** Final summary includes: "Run `/mkt-ai-seo --audit` for the AI-search counterpart audit. Modern strategies need both."
+- **If `mkt-ai-seo` is installed** (always true in this plugin — same package): Append to the final summary the line `See also: /mkt-ai-seo --audit for the AI-search counterpart audit. Modern strategies need both.`
+
+## See Also
+
+- `/mkt-ai-seo` — AI-search counterpart — modern strategy needs both (same plugin)
+- `/mkt-cro-audit` — conversion audit on the same pages (same plugin)
+- `/mkt-programmatic-seo` — fix gaps by generating high-quality pages at scale (same plugin)

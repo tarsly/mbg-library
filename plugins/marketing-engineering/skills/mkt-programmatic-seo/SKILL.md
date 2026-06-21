@@ -278,4 +278,10 @@ Full output: brain/marketing/seo/pSEO — {pattern} — {date}
 - **If user's CMS doesn't support dynamic routing well (e.g., Wix):** Recommend migrating to Next.js / Astro / Webflow CMS Collections before building.
 - **If the target keyword has low search volume:** Note: "{keyword} has ~{N} monthly searches. pSEO is best when long-tail volume sums to meaningful traffic. Re-check the seed."
 - **If pages will compete with paid programmatic SEO sites (Yelp, Zillow):** Be honest about ranking difficulty. Recommend going more specific (one neighborhood, not one city) or building a different angle (expert curation, not scraped data).
-- **If `mkt-ai-seo` is also installed:** Cross-link — every pSEO page should include the AI-SEO citation patterns (lead claim, FAQ schema, named entities).
+- **If `mkt-ai-seo` is also installed** (always true in this plugin — same package): Append to the output the line `See also: /mkt-ai-seo — every pSEO page should include the AI-SEO citation patterns (lead claim, FAQ schema, named entities).`
+
+## See Also
+
+- `/mkt-ai-seo` — AI-SEO patterns to apply to each generated page (same plugin)
+- `/mkt-seo-audit` — audit the first 5 generated pages once live (same plugin)
+- `/realestate-cma-builder` — generate CMA data to feed location pages (from `realtor-toolkit`)
