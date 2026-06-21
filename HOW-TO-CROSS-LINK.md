@@ -6,7 +6,7 @@ This repo's plugins are designed to compose. `person-brief` reads CRM context fr
 
 ---
 
-## The Five Cross-Link Types
+## The Six Cross-Link Types
 
 Pick the lightest type that meets the need. Heavier types (4, 5) require more careful fallback handling.
 
@@ -84,6 +84,25 @@ Invoke a sibling skill inline. Most fragile. Avoid unless the alternative would 
 ```
 
 **Reference implementation:** `plugins/person-brief/skills/brief-pre-meeting/SKILL.md`, Step 3: "invoke the **brief-person-30days** skill OR run the same source sweep inline." Explicit inline fallback.
+
+### Type 6 — `license-gated-mcp`
+
+Call a hosted MCP server that requires a valid customer license to return business logic. Used for premium/paid plugins where proprietary algorithms live on MBG servers (not in the markdown).
+
+**Detection:**
+
+```text
+1. Make the tool call to the gated MCP
+2. If response is 200 → use the result
+3. If response is 401 Unauthorized → license is missing/invalid/expired (graceful upsell)
+4. If response is 403 Forbidden → license is valid but tier doesn't include this tool
+5. If response is 429 Too Many Requests → rate limit hit on customer's tier
+6. If response is 5xx or unreachable → transient — suggest retry, do NOT recompute locally
+```
+
+**Fallback:** show a tier-specific upsell message (linking to `https://mybusinessgenie.ai/settings/api-keys` for 401, `/settings/billing` for 403). NEVER attempt the computation locally — the proprietary logic lives on the server by design.
+
+**Reference implementation:** `PREMIUM-PLUGIN-PATTERN.md` (repo root). Full architecture (thin plugin → Cloud Brain gatekeeper → MCP execution layer) plus the SKILL.md graceful-fallback block. Plugins with `requires_license: true` in their `plugin.json` use this pattern.
 
 ---
 
@@ -187,7 +206,7 @@ Add this field to every `plugins/<name>/.claude-plugin/plugin.json`. It's metada
 **Field rules:**
 
 - `plugin` — the kebab-case name of the companion plugin (matches `name` in that plugin's manifest)
-- `type` — one of `see-also`, `data-sharing`, `workflow-handoff`, `mcp-cascade`, `skill-handoff` (mirrors the five cross-link types)
+- `type` — one of `see-also`, `data-sharing`, `workflow-handoff`, `mcp-cascade`, `skill-handoff`, `license-gated-mcp` (mirrors the six cross-link types)
 - Multiple entries with the same `plugin` are allowed (a plugin can have multiple kinds of integration with the same companion). Keep them ordered alphabetically by plugin name for cleanliness.
 - A plugin with zero cross-links still includes the field: `"integrates_with": []`
 
@@ -257,7 +276,7 @@ grep -rn 'if available' plugins/*/skills/*/SKILL.md && echo "FOUND 'if available
 
 Plugin-marketplace economics reward composition. A user who installs three integrated plugins gets more value than the sum of three siloed plugins — and is more likely to come back for the fourth. But that only works if each install is a clear upgrade, never a regression.
 
-The five-type pattern + explicit fallbacks + `integrates_with` metadata is the lowest-overhead way to keep that contract. Follow it.
+The six-type pattern + explicit fallbacks + `integrates_with` metadata is the lowest-overhead way to keep that contract. Follow it.
 
 ---
 

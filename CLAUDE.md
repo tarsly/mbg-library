@@ -102,3 +102,18 @@ portable: all   # or 'claude' (Claude Code only) or 'prose-only'
 - `prose-only` — body is useful as reference but the skill doesn't fully function outside Claude Code
 
 If you omit the field, it defaults to `all`. Claude Code ignores the field — it's read only by the export scripts.
+
+---
+
+## Premium (License-Gated) Plugins
+
+To convert a plugin into a paid product, see `PREMIUM-PLUGIN-PATTERN.md` at repo root. That doc covers the full architecture (thin plugin → Cloud Brain gatekeeper → MCP execution layer), the `userConfig` + `mcpServers` plugin manifest pattern, the SKILL.md graceful-fallback section (Type 6 cross-link from `HOW-TO-CROSS-LINK.md`), and the full Firebase Cloud Functions server-side reference for the `genie-ai-web` repo.
+
+The TL;DR for plugin authors:
+
+- Add `userConfig.license_key` (sensitive, required) and an `mcpServers` entry pointing to the MBG license MCP to `plugin.json`.
+- Add `requires_license: true` to both `plugin.json` and the matching `marketplace.json` entry.
+- Every SKILL.md in the plugin must include the Type 6 graceful-fallback block — handle 401 (no license), 403 (wrong tier), 429 (rate limit), 5xx (transient) without ever recomputing locally.
+- Authoring rule: SKILL.md is thin orchestration; proprietary algorithms live server-side in MCP tools.
+
+No plugin in this repo currently uses this pattern. Pilot when ready.

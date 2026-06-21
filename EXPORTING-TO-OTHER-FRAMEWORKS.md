@@ -146,6 +146,51 @@ There's no caching layer. Exports are pure functions of the source tree.
 
 ---
 
+## License-Gated MCP (Premium Plugins)
+
+If a plugin is marked `requires_license: true` (per `PREMIUM-PLUGIN-PATTERN.md`), it calls a hosted MCP server that requires a customer license. The server is the same regardless of which framework the customer is running — only the client-side wiring differs.
+
+**Cursor.** Open Cursor Settings → MCP. Add a server entry:
+
+```json
+{
+  "mbg": {
+    "type": "http",
+    "url": "https://us-central1-<project>.cloudfunctions.net/mcp",
+    "headers": { "Authorization": "Bearer mbg_live_<your-key>" }
+  }
+}
+```
+
+The exported `.mdc` rules (under `dist/cursor/.cursor/rules/`) can now invoke premium MBG tools through Cursor's chat.
+
+**Codex CLI.** Codex has no native MCP support today, so the premium tools can't be invoked from Codex. The `dist/codex/AGENTS.md` includes the workflow text for context, but Cloud Brain calls fail under Codex. Premium plugins should be marketed for Claude Code / Cowork / Cursor / Anthropic API only.
+
+**Anthropic API (standalone).** Pass `mcp_servers` directly in the Messages API call:
+
+```python
+import anthropic, json
+client = anthropic.Anthropic()
+skill = json.load(open("dist/anthropic-api/tax-and-audit/tax-quarterly-estimate.json"))
+
+resp = client.messages.create(
+    model="claude-opus-4-8",
+    system=skill["system_prompt"],
+    messages=[{"role": "user", "content": "Compute Q3 estimate, MFJ in UT, $285K YTD"}],
+    mcp_servers=[{
+        "type": "url",
+        "url": "https://us-central1-<project>.cloudfunctions.net/mcp",
+        "authorization_token": "mbg_live_<your-key>",
+    }],
+)
+```
+
+**Manus.im.** No MCP client yet — premium plugins should NOT be promoted to Manus customers. The exported `MBG-SKILLS-REFERENCE.md` still contains the workflow text for reference, but the tools that require server-side execution can't be invoked. Revisit once Manus publishes an extension API.
+
+See `PREMIUM-PLUGIN-PATTERN.md` for the full architecture, license issuance flow, and Firebase server-side implementation.
+
+---
+
 ## Roll-back
 
 If you want to remove all cross-framework export work:
