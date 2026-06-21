@@ -1,0 +1,36 @@
+{
+  "name": "prospecting",
+  "displayName": "Prospecting",
+  "version": "1.0.0",
+  "description": "B2B lead discovery and enrichment. Define your ideal customer profile (ICP), find matching contacts at scale, enrich a name into verified email and phone, generate target lists from your buy box or ICP, and hand off qualified prospects directly into your CRM pipeline. Provider-agnostic — works with Apollo, Hunter, Lusha, ZoomInfo, or Vibe Prospecting MCPs if installed, with web-search fallback when no provider is configured.",
+  "author": {
+    "name": "MyBusinessGenie"
+  },
+  "memory_paths": {
+    "preferences": "brain/preferences/",
+    "pipeline": "pipeline/",
+    "prospects": "pipeline/prospects/",
+    "icp": "brain/icp/"
+  },
+  "requires_memory": true,
+  "memory_provider": "cloud-brain",
+  "industries": [
+    "all"
+  ],
+  "keywords": [
+    "prospecting",
+    "lead-generation",
+    "b2b",
+    "icp",
+    "ideal-customer-profile",
+    "enrichment",
+    "email-verification",
+    "apollo",
+    "hunter",
+    "lusha",
+    "zoominfo",
+    "vibe-prospecting",
+    "outbound",
+    "sales-intelligence"
+  ]
+}
