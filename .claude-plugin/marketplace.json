@@ -237,6 +237,20 @@
         "personal-development"
       ],
       "category": "personal-development"
+    },
+    {
+      "name": "person-brief",
+      "displayName": "Person Brief",
+      "source": "./plugins/person-brief",
+      "description": "Pre-meeting and pre-call intelligence for busy professionals. Synthesizes the last 30 days of activity on a person across Reddit, X, Hacker News, YouTube, GitHub, and the open web — then merges that signal with your Cloud Brain history of the relationship to produce a one-page brief before every important conversation. Three skills: brief-person-30days (general research), brief-pre-meeting (calendar-triggered meeting prep), brief-pre-call (sales-call game plan). Designed to run as a scheduled agent so you walk into every meeting already informed.",
+      "version": "1.0.0",
+      "author": { "name": "MyBusinessGenie" },
+      "keywords": [
+        "pre-meeting", "pre-call", "research", "person-brief",
+        "sales-intelligence", "meeting-prep", "social-signal",
+        "reddit", "hacker-news", "youtube", "github", "calendar-agent"
+      ],
+      "category": "research"
     }
   ]
 }
