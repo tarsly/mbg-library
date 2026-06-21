@@ -278,3 +278,12 @@ Next follow-up: {date}
 - **If deal value is provided in non-numeric format:** Parse common formats like "$5K", "$5,000", "5000", "five thousand" and convert to numeric. If unparseable, ask: "I couldn't parse the deal value '{input}'. Can you give me a number like $5,000?"
 - **If the user tries to move a lead backward in the pipeline (e.g., from negotiating back to new):** Allow it, but confirm: "Moving {name} from {current stage} back to {requested stage}. This is unusual — are you sure? I'll log the reason in the notes."
 - **If the user tries to update a closed lead (closed-won or closed-lost):** Allow it, but confirm: "This lead is already marked as {stage}. Do you want to reopen it? I'll move it to the stage you specified and log the reopen in the history."
+
+## See Also
+
+- `/bizops-pipeline-sync` — analysis layer on top of these leads (same plugin)
+- `/bizops-follow-up` — schedule follow-ups against these leads (same plugin)
+- `/prospect-find` — find new B2B leads to add (from `prospecting`)
+- `/prospect-enrich` — fill in missing email / phone / LinkedIn on a lead (from `prospecting`)
+- `/prospect-handoff` — push prospect lists into this pipeline (from `prospecting`)
+- `/brief-pre-call` — prep before calling a lead (from `person-brief`)

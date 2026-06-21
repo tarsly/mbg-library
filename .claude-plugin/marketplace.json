@@ -25,7 +25,7 @@
       "displayName": "Business Operations",
       "source": "./plugins/business-operations",
       "description": "A complete business operations toolkit for small business owners. Covers daily briefings, client onboarding, invoicing, pipeline management, hiring, financial snapshots, SOPs, travel planning, and more. Works across all industries.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "operations", "productivity", "CRM", "finance", "hiring", "travel",
