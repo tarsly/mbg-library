@@ -181,3 +181,10 @@ Save CMA output to memory when requested:
 mcp__cloud-brain__write_note:
   path: brain/deal-analyses/[address-slug]-cma-[YYYY-MM-DD].md
 ```
+
+## See Also
+
+- `/listing-launch-checklist` — launch the listing this CMA priced (same plugin)
+- `/listing-presentation-builder` — present the CMA to the seller (same plugin)
+- `/mkt-programmatic-seo` — generate "homes for sale in {city}" location pages at scale using CMA data (from `marketing-engineering`)
+- `/mkt-landing-page` — listing landing page powered by this pricing (from `marketing-engineering`)

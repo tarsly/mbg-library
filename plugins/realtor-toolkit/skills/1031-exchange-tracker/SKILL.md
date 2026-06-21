@@ -296,3 +296,9 @@ Use these to confirm they understand what's ahead:
 ---
 
 **Bottom line:** A 1031 exchange is a powerful tax tool that most agents under-utilize. But it demands obsessive attention to deadlines. Use this skill as your daily checklist, your client's peace of mind, and your compliance safety net. The stakes are too high for guesswork.
+
+## See Also
+
+- `/tax-cost-segregation` — cost seg on the replacement property — interacts with 1031 basis carryover (from `tax-and-audit`)
+- `/tax-quarterly-estimate` — fold 1031 gain deferral into the quarterly estimate (from `tax-and-audit`)
+- `/disclosure-compliance-tracker` — disclosure for the relinquished property sale (same plugin)
