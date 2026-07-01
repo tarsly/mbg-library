@@ -2,6 +2,29 @@ import { randomUUID } from 'node:crypto';
 import type { ChatDbRow } from './chat-db.js';
 import { extractText } from './body-parser.js';
 
+/** Seconds between Unix epoch (1970-01-01) and Apple Cocoa epoch (2001-01-01) UTC */
+const COCOA_EPOCH_OFFSET_S = 978_307_200;
+/** Nanoseconds in one second */
+const NS_PER_S = 1_000_000_000;
+/** Any date value larger than this is presumed nanoseconds; smaller = seconds. */
+const NS_HEURISTIC_THRESHOLD = 1_000_000_000_000; // 10^12; ~2001 in ns is 0, ~2100 in s is ~3e9
+
+/**
+ * Decode message.date to ISO 8601. macOS ≥ 10.13 stores nanoseconds since 2001-01-01;
+ * older versions stored seconds. Returns null timestamp fallback if the value is
+ * missing or clearly bad.
+ */
+function decodeCocoaDate(raw: number | bigint | null): string {
+  if (raw === null || raw === undefined) return new Date().toISOString();
+  const n = typeof raw === 'bigint' ? Number(raw) : raw;
+  if (!Number.isFinite(n) || n <= 0) return new Date().toISOString();
+  const seconds = n > NS_HEURISTIC_THRESHOLD ? n / NS_PER_S : n;
+  const unixMs = (seconds + COCOA_EPOCH_OFFSET_S) * 1000;
+  const d = new Date(unixMs);
+  if (Number.isNaN(d.getTime())) return new Date().toISOString();
+  return d.toISOString();
+}
+
 export interface IMessageRecord {
   id: string;
   rowid: number;
@@ -35,10 +58,10 @@ export function adaptChatDbRow(row: ChatDbRow): IMessageRecord | null {
     id: randomUUID(),
     rowid: row.rowid,
     chatGuid: row.chat_guid,
-    sender: row.sender ?? (row.is_from_me ? 'me' : 'unknown'),
+    sender: row.is_from_me === 1 ? 'me' : (row.sender ?? 'unknown'),
     isFromMe: row.is_from_me === 1,
     content,
-    timestamp: new Date().toISOString(),
+    timestamp: decodeCocoaDate(row.date),
     attachments,
   };
 }

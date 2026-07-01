@@ -9,6 +9,11 @@ export interface ChatDbRow {
   is_from_me: number;
   sender: string | null;
   chat_guid: string | null;
+  /**
+   * Raw value from message.date. Apple Cocoa reference date (2001-01-01 UTC).
+   * Modern macOS (>=10.13) stores nanoseconds; older stored seconds. Decoded in adapter.ts.
+   */
+  date: number | bigint | null;
   attachment_paths: string | null;
   attachment_mimes: string | null;
   attachment_names: string | null;
@@ -43,7 +48,7 @@ export class ChatDb {
     const stmt = this.db!.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me,
+             m.is_from_me, m.date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,
@@ -67,7 +72,7 @@ export class ChatDb {
     const stmt = this.db!.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me,
+             m.is_from_me, m.date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,

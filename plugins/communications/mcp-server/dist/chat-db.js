@@ -16,7 +16,7 @@ export class ChatDb {
         const stmt = this.db.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me,
+             m.is_from_me, m.date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,
@@ -39,7 +39,7 @@ export class ChatDb {
         const stmt = this.db.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me,
+             m.is_from_me, m.date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,
