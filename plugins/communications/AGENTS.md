@@ -1,7 +1,7 @@
 # Communications Suite — Agent Capabilities Manifest
 
 *For use by system-03 (Agent Designer) and system-04 (Agent Activator)*
-*Last updated: 2026-06-12 — v1.1.0: comm-plaud-sync added (8 skills)*
+*Last updated: 2026-06-30 — v2.1.0: comm-imessage-fast added (9 skills, bundled MCP server replaces BlueBubbles)*
 
 ---
 
@@ -11,7 +11,7 @@
 
 **Target users:** Business owners, executives, sales professionals, consultants, and anyone who spends significant time in email, meetings, and voice notes. The flagship use case is the **Executive Inbox Agent** — a scheduled agent that triages email and syncs PLAUD recordings automatically each morning before the user starts their day.
 
-**Plugin version:** 1.1.0 (8 skills)
+**Plugin version:** 2.1.0 (9 skills — includes a bundled `imessage-fast` MCP server for native iMessage without BlueBubbles)
 
 ---
 
@@ -129,9 +129,11 @@ None — every input changes every run. No preferences layer.
 
 ---
 
-### 8. comm-imessage
+### 8. comm-imessage *(legacy)*
 
 **What it does:** Sends iMessages to individuals or groups via BlueBubbles MCP. Always shows message for confirmation before sending.
+
+**Status:** Legacy. New activations should use `comm-imessage-fast` (skill #9). Kept for users already running BlueBubbles.
 
 **Preferences collected at activation:**
 - Name for sign-offs
@@ -142,6 +144,28 @@ None — every input changes every run. No preferences layer.
 **Suggested schedule:** On-demand — triggered when texting someone.
 
 **Natural pairings:** comm-inbox-triage (quick follow-up texts to urgent contacts), comm-meeting-prep (reminder text to attendees before meeting).
+
+---
+
+### 9. comm-imessage-fast
+
+**What it does:** Sends, reads, and searches iMessages via a bundled MCP server (`imessage-fast`) that reads `~/Library/Messages/chat.db` directly and sends via AppleScript to `Messages.app`. No BlueBubbles, no localhost server, no passwords. Preferred replacement for `comm-imessage`.
+
+**MCP tools:** `imessage_send`, `imessage_search_chats`, `imessage_read_chat`, `imessage_poll_new`, `imessage_peek_new`, `imessage_reset_marker`
+
+**Preferences collected at activation:**
+- Name for sign-offs
+- Frequently messaged contacts or groups (optional shortcuts) — same shape as `comm-imessage`, shares `brain/preferences/comm-preferences.md`
+
+**Prerequisites (macOS only):**
+- Node.js LTS ≥ 20 (`brew install node`)
+- Full Disk Access granted to the terminal that launches Claude Code
+- Messages.app open and signed in
+- One-time setup: run `<plugin_root>/mcp-server/setup.sh` after plugin install
+
+**Suggested schedule:** On-demand — triggered when texting someone, or when the user asks "what's new in iMessage?" / "what did X text me?".
+
+**Natural pairings:** comm-inbox-triage (quick follow-up texts to urgent contacts), comm-meeting-prep (reminder text to attendees before meeting), comm-meeting-actions (text action items to owners).
 
 ---
 
@@ -228,7 +252,8 @@ Recommended if the client also has `business-operations` installed. Pair:
 | comm-negotiation-prep | On-demand | User trigger | Run before any significant negotiation |
 | comm-plaud-sync | Daily, 6:00 AM (`--days 1`) | Scheduled | Pairs with inbox triage in the morning Communications Agent |
 | comm-plaud-sync (weekly) | Weekly, Monday 7:00 AM (`--days 7`) | Scheduled | Alternative for lower-volume PLAUD users |
-| comm-imessage | On-demand | User trigger | Always requires user confirmation before send |
+| comm-imessage *(legacy)* | On-demand | User trigger | BlueBubbles path — prefer `comm-imessage-fast` for new activations |
+| comm-imessage-fast | On-demand | User trigger | Native — bundled `imessage-fast` MCP server; always requires user confirmation before send |
 
 ---
 
@@ -237,7 +262,8 @@ Recommended if the client also has `business-operations` installed. Pair:
 **system-03 (Agent Designer):**
 - The Executive Inbox Agent is the primary suggested configuration — lead with it for any client who mentions email overwhelm, inbox problems, or communications management
 - This plugin pairs naturally with `business-operations` — if both are installed, suggest the integrated Configuration 3
-- `comm-imessage` requires the BlueBubbles MCP connector — flag this if the client doesn't have it connected
+- `comm-imessage-fast` is the default iMessage path. It bundles its own MCP server (`imessage-fast`) inside the plugin — no external connector to configure. On first install, the client must run `<plugin_root>/mcp-server/setup.sh` once (installs Node deps and reminds them to grant Full Disk Access). Flag this setup step during activation.
+- `comm-imessage` (legacy) requires the BlueBubbles MCP connector — only flag this for clients specifically continuing with BlueBubbles; otherwise route them to `comm-imessage-fast`
 - `comm-plaud-sync` requires the Playwright MCP connector — flag this if not connected; the skill has a built-in onboarding flow that guides first-time setup including Playwright install, PLAUD account verification, and initial login
 
 **system-04 (Agent Activator):**

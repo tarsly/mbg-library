@@ -1,5 +1,5 @@
 # Communications Suite
-### Version 1.0.0 — MyBusinessGenie
+### Version 2.1.0 — MyBusinessGenie
 
 ---
 
@@ -61,10 +61,29 @@ Builds a complete negotiation strategy: BATNA analysis, leverage map, counterpar
 
 ---
 
-### Comm-iMessage *(requires BlueBubbles connector)*
-**Trigger phrases:** "send a text," "iMessage," "text someone," "send an iMessage"
+### Comm-iMessage-Fast *(bundled MCP server — recommended)*
+**Trigger phrases:** "send a text," "iMessage," "text someone," "send an iMessage," "what's new in iMessage," "what did [name] text me"
 
-Send iMessages from your AI to individuals or groups via BlueBubbles. Always shows the message for your confirmation before sending. Requires the BlueBubbles app and MCP connector.
+Send, read, and search iMessages via a bundled `imessage-fast` MCP server that reads `~/Library/Messages/chat.db` directly and sends through AppleScript to `Messages.app`. No BlueBubbles, no localhost server, no passwords. Always shows the message for your confirmation before sending.
+
+**One-time setup after plugin install:**
+```
+cd <plugin_root>/mcp-server
+./setup.sh
+```
+The setup script checks for Node.js LTS ≥ 20 (`brew install node` if missing) and installs runtime dependencies. It also prints the Full Disk Access instructions your terminal needs to read `chat.db`. Restart Claude Code after setup completes.
+
+**Requirements (macOS only):**
+- Node.js LTS ≥ 20
+- Full Disk Access granted to the terminal that launches Claude Code
+- Messages.app open and signed in
+
+---
+
+### Comm-iMessage *(legacy — BlueBubbles path)*
+**Trigger phrases:** *(prefer `comm-imessage-fast` above)*
+
+Legacy skill kept for users still running BlueBubbles. New activations should use `comm-imessage-fast`, which needs no BlueBubbles server, no port 1234, and no password.
 
 ---
 
@@ -118,9 +137,15 @@ On first run, each skill collects your preferences in one message and saves them
 
 ## Version History
 
+### v2.1.0 — 2026-06-30
+Added `comm-imessage-fast` — native iMessage via a bundled `imessage-fast` MCP server. Replaces the BlueBubbles dependency for send/read/search. `comm-imessage` (BlueBubbles) is retained for existing users but marked legacy in AGENTS.md and its SKILL.md. Nine skills total.
+
+### v2.0.2 — earlier
+`comm-plaud-sync` added. Eight skills.
+
 ### v1.0.0 — 2026-06-12
 Initial release. Seven skills: inbox triage, email drafting, meeting prep, meeting transcript processing, meeting action extraction, negotiation prep, and iMessage. Shared preferences layer. Executive Inbox Agent configuration in AGENTS.md.
 
 ---
 
-*MyBusinessGenie — communications v1.0.0*
+*MyBusinessGenie — communications v2.1.0*

@@ -1,6 +1,8 @@
 # COMM-iMessage
 ## Send iMessages via BlueBubbles
 
+> **LEGACY.** New work should use `comm-imessage-fast`, which ships a bundled MCP server that talks directly to `Messages.app` and reads `chat.db` — no BlueBubbles required. This skill stays available for users still running BlueBubbles.
+
 ---
 
 ## Overview
