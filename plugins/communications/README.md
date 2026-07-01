@@ -1,5 +1,5 @@
 # Communications Suite
-### Version 2.1.0 — MyBusinessGenie
+### Version 2.2.0 — MyBusinessGenie
 
 ---
 
@@ -66,17 +66,26 @@ Builds a complete negotiation strategy: BATNA analysis, leverage map, counterpar
 
 Send, read, and search iMessages via a bundled `imessage-fast` MCP server that reads `~/Library/Messages/chat.db` directly and sends through AppleScript to `Messages.app`. No BlueBubbles, no localhost server, no passwords. Always shows the message for your confirmation before sending.
 
-**One-time setup after plugin install:**
-```
-cd <plugin_root>/mcp-server
-./setup.sh
-```
-The setup script checks for Node.js LTS ≥ 20 (`brew install node` if missing) and installs runtime dependencies. It also prints the Full Disk Access instructions your terminal needs to read `chat.db`. Restart Claude Code after setup completes.
-
 **Requirements (macOS only):**
-- Node.js LTS ≥ 20
-- Full Disk Access granted to the terminal that launches Claude Code
+- Node.js LTS ≥ 20 (`brew install node` if missing)
+- Full Disk Access granted to the process that launches Claude — see setup skill below
 - Messages.app open and signed in
+
+---
+
+### Comm-iMessage-Fast-Setup *(one-time post-install)*
+**Trigger phrases:** "set up iMessage," "install iMessage plugin," "iMessage isn't working," "why can't Claude text"
+
+The first-time setup companion to `comm-imessage-fast`. Auto-invoked when any iMessage tool fails with a dependencies / MCP-server / Full-Disk-Access error, or explicitly when the user says something like "set up iMessage."
+
+**What it does:**
+- Finds the plugin install (works in both Claude Code and Claude Desktop paths)
+- Verifies Node.js ≥ 20
+- Runs the bundled `setup.sh` to install runtime dependencies
+- Walks the user through granting Full Disk Access (to `Claude.app` in Desktop, or to the terminal in Claude Code)
+- Verifies the MCP tools come online after a Claude restart
+
+Idempotent — safe to re-run any time. Users can also copy-paste the one-liner from the skill for a manual setup path.
 
 ---
 
@@ -137,6 +146,9 @@ On first run, each skill collects your preferences in one message and saves them
 
 ## Version History
 
+### v2.2.0 — 2026-06-30
+Added `comm-imessage-fast-setup` — the one-time post-install setup skill for `imessage-fast`. Locates the plugin install (Claude Code + Claude Desktop paths), runs `setup.sh`, guides FDA grant, and verifies tools come online. Auto-invoked by `comm-imessage-fast` on any dependencies / FDA error. Ten skills total.
+
 ### v2.1.0 — 2026-06-30
 Added `comm-imessage-fast` — native iMessage via a bundled `imessage-fast` MCP server. Replaces the BlueBubbles dependency for send/read/search. `comm-imessage` (BlueBubbles) is retained for existing users but marked legacy in AGENTS.md and its SKILL.md. Nine skills total.
 
@@ -148,4 +160,4 @@ Initial release. Seven skills: inbox triage, email drafting, meeting prep, meeti
 
 ---
 
-*MyBusinessGenie — communications v2.1.0*
+*MyBusinessGenie — communications v2.2.0*

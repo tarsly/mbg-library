@@ -18,15 +18,15 @@ This skill sends, reads, and searches iMessages using the `imessage-fast` MCP se
 
 ## Prerequisites
 
-Two things must be true on the user's Mac. If either check fails, walk the user through the fix before attempting any tool call.
+Three things must be true on the user's Mac. If any check fails, **invoke the `comm-imessage-fast-setup` skill** to handle it — do not walk the user through the setup manually.
 
-| Requirement | Verify | Fix |
-|---|---|---|
-| The `imessage-fast` MCP server is running | Call `imessage_search_chats` with a harmless query like `.` — if the tool isn't listed or errors on setup, the server isn't up | Run the setup script once: `~/.claude/plugins/communications/mcp-server/setup.sh` (path depends on install location). If Node isn't installed, run `brew install node` first (LTS ≥ 20). Then restart Claude Code. |
-| Full Disk Access | The setup script prints the fix path | System Settings → Privacy & Security → Full Disk Access → add the terminal app that launches Claude Code (Terminal, iTerm, Warp). Quit and reopen that terminal, then restart Claude Code. |
-| Messages.app open + signed in | User signed in to iMessage | Open Messages.app, sign in with the Apple ID that owns their iMessage number |
+| Requirement | Verify |
+|---|---|
+| The `imessage-fast` MCP server is running | Call `imessage_search_chats` with a harmless query like `.` — if the tool isn't listed or errors with `Dependencies not installed` / `MCP server not connected`, invoke `comm-imessage-fast-setup` |
+| Full Disk Access | If any tool call errors with "authorization denied" or "Cannot open ~/Library/Messages/chat.db", invoke `comm-imessage-fast-setup` |
+| Messages.app open + signed in | If `imessage_send` errors mention AppleScript failure, prompt the user to open Messages.app and sign in with their iMessage Apple ID |
 
-If the MCP server's stderr contains "Full Disk Access is required" or "Dependencies not installed", surface the exact printed fix instructions verbatim — don't paraphrase.
+**Recovery rule:** whenever an iMessage tool returns an error mentioning dependencies, Node, MCP server, Full Disk Access, or `chat.db` access, hand off to `comm-imessage-fast-setup` and let it drive the fix. Don't retry the failing tool call until setup confirms tools are ready.
 
 ---
 

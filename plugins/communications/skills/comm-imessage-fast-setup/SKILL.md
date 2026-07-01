@@ -1,0 +1,140 @@
+---
+name: comm-imessage-fast-setup
+description: One-time setup for the comm-imessage-fast MCP server. Use this when the user says "set up iMessage", "install iMessage plugin", "iMessage isn't working", "why can't Claude send iMessages", or when ANY imessage_* tool errors with server-not-loaded / dependencies-missing / node-not-found. Also invoke proactively the first time the user tries to use comm-imessage-fast and it fails. Installs Node dependencies for the bundled MCP server, checks Full Disk Access, and verifies the tools come online.
+---
+
+# COMM-iMessage-Fast — Setup
+
+## When to run this skill
+
+Invoke this skill in any of these situations:
+
+- User asks: "set up iMessage", "install iMessage", "why isn't Claude texting", "iMessage isn't working", "get iMessage running"
+- Any `imessage_*` tool returns an error mentioning `Dependencies not installed`, `Node.js`, `node_modules`, or `MCP server` unavailable
+- After a fresh `/plugin install communications@my-business-genie-library` — before the first `imessage_send`
+- After the plugin updates and something breaks
+
+This skill is idempotent — safe to re-run.
+
+---
+
+## Steps
+
+### 1. Locate the plugin install
+
+Claude Code and Claude Desktop install plugins in different places. Find the setup script in either location:
+
+```bash
+SETUP=$(find \
+  ~/.claude \
+  ~/Library/Application\ Support/Claude \
+  -path '*/communications/mcp-server/setup.sh' \
+  2>/dev/null | head -1)
+```
+
+If `SETUP` is empty, the plugin isn't installed. Tell the user:
+
+> "I can't find the `communications` plugin. Install it first with:
+> ```
+> /plugin marketplace add tarsly/mbg-library
+> /plugin install communications@my-business-genie-library
+> ```
+> Then re-run this skill."
+
+### 2. Check Node.js is available
+
+The MCP server needs Node LTS ≥ 20.
+
+```bash
+node -v 2>/dev/null || echo "NODE_MISSING"
+```
+
+If output is `NODE_MISSING` or the major version is below 20, tell the user:
+
+> "Node.js LTS 20+ isn't installed. Install it first:
+> ```
+> brew install node        # macOS with Homebrew (fastest)
+> ```
+> Or download the LTS installer from https://nodejs.org and re-run this skill."
+
+Stop and wait for the user to install Node. Don't proceed until `node -v` prints a version ≥ 20.
+
+### 3. Run the setup script
+
+```bash
+cd "$(dirname "$SETUP")" && ./setup.sh
+```
+
+Expected output ends with `✅ Setup complete.`
+
+If the script errors, capture the error and share it with the user. Common failures:
+
+| Error | Fix |
+|---|---|
+| `npm: command not found` | Reinstall Node.js (npm ships with Node) |
+| `EACCES: permission denied` | Check the plugin install dir is writable: `ls -la "$(dirname "$SETUP")"` |
+| Any native build failure on `better-sqlite3` | Install Xcode Command Line Tools: `xcode-select --install` |
+
+### 4. Check Full Disk Access
+
+The MCP server reads `~/Library/Messages/chat.db`, which requires Full Disk Access on macOS. Test whether the process that runs the MCP server has it:
+
+```bash
+sqlite3 ~/Library/Messages/chat.db "SELECT 1;" 2>&1
+```
+
+- If output is `1` — FDA is granted, proceed.
+- If output contains `authorization denied` or `unable to open` — FDA is missing.
+
+**Important: FDA must be granted to the right process.**
+
+- **In Claude Code (terminal-based):** FDA must be granted to the terminal application that launches `claude` (Terminal.app, iTerm.app, Warp.app, etc.).
+- **In Claude Desktop:** FDA must be granted to `/Applications/Claude.app` itself.
+
+Tell the user:
+
+> "The MCP server needs Full Disk Access to read your Messages database. To grant it:
+>
+> 1. Open **System Settings → Privacy & Security → Full Disk Access**
+> 2. Click `+` and add:
+>    - **Claude Desktop users:** `/Applications/Claude.app`
+>    - **Claude Code users:** your terminal app (Terminal, iTerm, or Warp)
+> 3. Toggle it **on**
+> 4. Fully quit Claude (Cmd-Q for Desktop, or close and reopen your terminal for Code)
+> 5. Reopen Claude
+>
+> After granting FDA and restarting Claude, iMessage tools will work automatically."
+
+### 5. Verify the MCP server is up
+
+After the user restarts Claude, verify tools are available. Try:
+
+```
+imessage_search_chats(query=".", limit=1)
+```
+
+- If it returns a result (or an empty list) — setup succeeded. Confirm: "✅ iMessage is ready. Try 'text Mary that I'm running late' or 'what's new in iMessage?'."
+- If it errors — surface the error verbatim. Common causes:
+  - `Cannot open ~/Library/Messages/chat.db` → FDA not granted to the process actually running the MCP server. Re-check step 4.
+  - `MCP server not connected` → Claude wasn't restarted after `setup.sh`. Ask user to fully quit and reopen Claude.
+  - `Node.js 20+ required` → Node version too old. Redo step 2.
+
+---
+
+## What this skill does NOT do
+
+- **It does not install the plugin itself.** The user runs `/plugin install` first; this skill handles the post-install setup.
+- **It does not grant FDA.** macOS requires user interaction in System Settings — no CLI equivalent.
+- **It does not restart Claude.** The user must Cmd-Q Claude Desktop or close-and-reopen their terminal for Claude Code. Prompt them to do it.
+
+---
+
+## Quick reference — the one-liner
+
+For power users who just want the setup command:
+
+```bash
+SETUP=$(find ~/.claude ~/Library/Application\ Support/Claude -path '*/communications/mcp-server/setup.sh' 2>/dev/null | head -1) && [ -n "$SETUP" ] && (cd "$(dirname "$SETUP")" && ./setup.sh)
+```
+
+Copy-paste, hit enter, grant FDA, restart Claude. Done.
