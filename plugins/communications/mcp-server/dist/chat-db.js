@@ -60,16 +60,24 @@ export class ChatDb {
     searchChats(query, limit) {
         this.ensureOpen();
         const like = `%${query}%`;
+        // Correlated subqueries — NOT joined-then-GROUP_CONCATted — so each participant
+        // handle is listed once per chat rather than (participants × messages) times.
         const stmt = this.db.prepare(`
       SELECT c.guid AS chat_guid,
              c.display_name AS display_name,
-             GROUP_CONCAT(h.id, '||') AS participants,
-             MAX(m.rowid) AS last_message_rowid
+             (
+               SELECT GROUP_CONCAT(h.id, '||')
+                 FROM chat_handle_join chj
+                 JOIN handle h ON h.rowid = chj.handle_id
+                WHERE chj.chat_id = c.rowid
+             ) AS participants,
+             (
+               SELECT MAX(m.rowid)
+                 FROM chat_message_join cmj
+                 JOIN message m ON m.rowid = cmj.message_id
+                WHERE cmj.chat_id = c.rowid
+             ) AS last_message_rowid
       FROM chat c
-      LEFT JOIN chat_handle_join chj ON chj.chat_id = c.rowid
-      LEFT JOIN handle h ON h.rowid = chj.handle_id
-      LEFT JOIN chat_message_join cmj ON cmj.chat_id = c.rowid
-      LEFT JOIN message m ON m.rowid = cmj.message_id
       WHERE (c.display_name IS NOT NULL AND c.display_name LIKE ?)
          OR c.guid LIKE ?
          OR EXISTS (
@@ -77,7 +85,6 @@ export class ChatDb {
               JOIN handle h2 ON h2.rowid = chj2.handle_id
               WHERE chj2.chat_id = c.rowid AND h2.id LIKE ?
             )
-      GROUP BY c.rowid
       ORDER BY last_message_rowid DESC NULLS LAST
       LIMIT ?
     `);
