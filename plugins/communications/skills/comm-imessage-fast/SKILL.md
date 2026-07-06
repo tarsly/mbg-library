@@ -52,7 +52,7 @@ The `imessage-fast` MCP server exposes nine tools. Use them in this order for th
 
 At the start of the skill:
 1. Search Cloud Brain for saved preferences: `search_notes` with query `comm preferences`.
-2. If found: read the user's name and any saved contact shortcuts.
+2. If found: read the user's name, saved contact shortcuts, and the `## Group Threads` table — a saved group GUID skips the whole find/disambiguate flow.
 3. If not found: continue silently — don't block on preferences for a one-off text.
 
 ---
@@ -102,6 +102,7 @@ At the start of the skill:
 
 1. Resolve names to numbers/emails (Cloud Brain shortcuts, then `imessage_search_chats`).
 2. Call `imessage_find_group` with all participants. Note whether an exact-match thread exists and whether `groupShortcutInstalled` is true.
+   - **If the user includes themselves** ("text me and Luke"), pass their handle anyway — the server detects and strips the user's own numbers/emails (`selfHandlesExcluded` in the result), because macOS never lists the sender as a chat participant. Matching then runs on the remaining people, so "me + Luke" correctly reuses the existing Luke thread. Tell the user they'll see the message as sent in that thread rather than receiving a separate copy.
 3. Ask the disambiguation question (mandatory, ONE message):
    > "Send this as a **group thread** (everyone sees each other and the replies) or **individually** (separate private 1:1 texts)?"
    - If an exact-match thread exists, say so: "You already have a group thread with exactly these people — I'd reuse it."
@@ -118,7 +119,8 @@ At the start of the skill:
    Send this message? (yes / edit / cancel)
    ```
 6. On "yes": `imessage_send_group` (set `fallbackToIndividual` only if authorized in step 4) or `imessage_send_individual`.
-7. Report the `method` from the result honestly: existing thread reused, new group created (save the returned `chatGuid` to Cloud Brain shortcuts if the user wants), or individual fan-out — including any per-recipient failures.
+7. Report the `method` AND `delivery` from the result honestly: existing thread reused, new group created, delivery `retried-via-applescript` (the shortcut's send was blocked — usually the one-time macOS permission prompt; tell the user to click **Always Allow** in Shortcuts), or individual fan-out — including any per-recipient failures.
+8. Save any new group `chatGuid` to Cloud Brain per the Memory section below — don't wait to be asked.
 
 ---
 
@@ -157,15 +159,32 @@ To send a similar message to multiple recipients:
 
 ---
 
-## Memory — Save Contacts
+## Memory — Save Contacts and Thread GUIDs
 
-After a successful first send to a new contact, offer to save them:
+**Contacts** — after a successful first send to a new contact, offer to save them:
 
 > "Want me to save [Name] as a shortcut so I don't need to look them up next time?"
 
 If yes, append to the contacts section of `brain/preferences/comm-preferences.md`. Use the plugin's memory conventions — do not include a `brain/` prefix in the `folder` param.
 
-Store: display name, phone or email, and (for group chats) chat GUID. Never store message content.
+Store: display name, phone or email. Never store message content.
+
+**Group thread GUIDs** — save these **proactively** (no need to ask) whenever one surfaces: a new group created by `imessage_send_group`, an existing thread matched by `imessage_find_group` that the user confirms is "the" group, or a group the user sends to by name. GUID lookups from Cloud Brain are instant and skip the whole find/disambiguate dance next time.
+
+Maintain a `## Group Threads` section in `comm-preferences`:
+
+```markdown
+## Group Threads
+
+| Name | chatGuid | Participants | Last used |
+|---|---|---|---|
+| Emma + Tate | iMessage;+;chat1234... | Emma (+1801...), Tate (+1801...) | 2026-07-06 |
+```
+
+- One row per thread; update `Last used` on reuse rather than appending duplicates.
+- Name it what the user calls it ("the family group", "MBG leadership"), not the GUID.
+- On any multi-recipient request, check this table FIRST in pre-flight — before `imessage_find_group`.
+- If a saved GUID errors on send (thread deleted), remove the row and fall back to `imessage_find_group`.
 
 ---
 

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { ChatDb } from './chat-db.js';
 import { adaptRows } from './filters.js';
+import { normalizeHandle } from './chat-db.js';
 import { getMarker, setMarker, stateFilePath } from './marker-store.js';
 import * as sender from './applescript-sender.js';
 import * as shortcuts from './shortcuts-runner.js';
@@ -36,6 +37,30 @@ async function fanOut(
     await shortcuts.sleep(1500);
   }
   return results;
+}
+
+/**
+ * chat.db never lists the user themself in chat_handle_join, so "text me and
+ * Luke" must match Luke's thread, not fail forever. Splits the given handles
+ * into the user's own (by chat.account_login) and everyone else.
+ */
+function splitSelfHandles(
+  chatDb: ChatDb,
+  participants: string[],
+): { others: string[]; self: string[] } {
+  let selfSet: Set<string>;
+  try {
+    selfSet = new Set(chatDb.getSelfHandles());
+  } catch {
+    return { others: participants, self: [] };
+  }
+  const others: string[] = [];
+  const self: string[] = [];
+  for (const p of participants) {
+    (selfSet.has(normalizeHandle(p)) ? self : others).push(p);
+  }
+  // Degenerate input (only self-handles): fall back to the original list.
+  return others.length > 0 ? { others, self } : { others: participants, self: [] };
 }
 
 export function registerTools(server: McpServer, chatDb: ChatDb): void {
@@ -78,10 +103,11 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
         .array(z.string().min(3))
         .min(2)
         .max(30)
-        .describe('Phone numbers (any format) and/or emails. Do not include the sender.'),
+        .describe("Phone numbers (any format) and/or emails. Including the user's own number/email is fine — it is detected and excluded from matching (macOS never lists the sender as a chat participant)."),
     },
     async ({ participants }) => {
-      const matches = chatDb.findChatsByParticipants(participants);
+      const { others, self } = splitSelfHandles(chatDb, participants);
+      const matches = chatDb.findChatsByParticipants(others);
       return {
         content: [
           {
@@ -90,6 +116,7 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
               {
                 count: matches.length,
                 groupShortcutInstalled: await shortcuts.groupShortcutInstalled(),
+                selfHandlesExcluded: self,
                 matches,
               },
               null,
@@ -109,7 +136,7 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
         .array(z.string().min(3))
         .min(2)
         .max(30)
-        .describe('Phone numbers (E.164 preferred) and/or emails. Do not include the sender.'),
+        .describe("Phone numbers (E.164 preferred) and/or emails. Including the user's own number/email is fine — it is detected and stripped (the sender is implicitly in every thread; macOS never lists them as a participant)."),
       text: z.string().min(1).describe('Message body'),
       fallbackToIndividual: z
         .boolean()
@@ -117,13 +144,18 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
         .describe('If the group path fails, send to each recipient as separate 1:1 messages. Only set true with explicit user consent.'),
     },
     async ({ participants, text, fallbackToIndividual }) => {
-      // 1. Existing thread with exactly these people. If chat.db is unreadable
-      // (no Full Disk Access), skip the reuse path — the shortcut can still
-      // create/send without ever touching chat.db.
+      // Strip the user's own handles: "me + Luke" must reuse Luke's thread, not
+      // fail matching forever (the sender is never listed in chat_handle_join).
+      let recipients = participants;
       let dbAvailable = true;
       let existing: ReturnType<typeof chatDb.findChatsByParticipants> = [];
       try {
-        existing = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
+        const { others } = splitSelfHandles(chatDb, participants);
+        recipients = others;
+        // 1. Existing thread with exactly these people. If chat.db is unreadable
+        // (no Full Disk Access), skip the reuse path — the shortcut can still
+        // create/send without ever touching chat.db.
+        existing = chatDb.findChatsByParticipants(recipients).filter((m) => m.match === 'exact');
       } catch {
         dbAvailable = false;
       }
@@ -141,24 +173,44 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
       // 2. Create the group via the Shortcuts bridge.
       if (await shortcuts.groupShortcutInstalled()) {
         try {
-          await shortcuts.sendGroupViaShortcut(participants, text);
+          await shortcuts.sendGroupViaShortcut(recipients, text);
           // Recover the new thread's GUID so future sends can use AppleScript directly.
           let chatGuid: string | null = null;
           if (dbAvailable) {
             for (let i = 0; i < 5 && !chatGuid; i++) {
               await shortcuts.sleep(2000);
-              const found = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
+              const found = chatDb.findChatsByParticipants(recipients).filter((m) => m.match === 'exact');
               if (found.length > 0) chatGuid = found[0].chat_guid;
+            }
+          }
+          // Verify DELIVERY, not just thread existence: `shortcuts run` exits 0
+          // even when the one-time macOS permission prompt swallows the send,
+          // leaving an empty thread. If nothing from the user landed in the
+          // thread, re-send once via plain AppleScript (safe: zero sent rows
+          // means the shortcut's message never went out).
+          let delivery: 'confirmed' | 'retried-via-applescript' | 'unknown' = 'unknown';
+          if (chatGuid) {
+            delivery = 'confirmed';
+            try {
+              if (chatDb.countSentMessages(chatGuid) === 0) {
+                await sender.sendMessage(chatGuid, text);
+                delivery = 'retried-via-applescript';
+              }
+            } catch {
+              delivery = 'unknown';
             }
           }
           return jsonResult({
             method: 'shortcut-created-group',
             chatGuid,
+            delivery,
             note: chatGuid
-              ? 'Group created and message sent. Reuse this chatGuid for future sends.'
+              ? delivery === 'retried-via-applescript'
+                ? 'Group thread created, but the shortcut send was blocked (likely the one-time macOS "Allow … to send messages?" prompt) — re-sent directly to the new thread via AppleScript. Tell the user to approve the Shortcuts prompt with Always Allow so future first-sends go through cleanly.'
+                : 'Group created and message delivery confirmed. Reuse this chatGuid for future sends.'
               : dbAvailable
-                ? 'Shortcut reported success but the new thread has not appeared in chat.db yet — ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID.'
-                : 'Sent via shortcut. chat.db is unreadable (no Full Disk Access), so an existing thread could not be checked and the new chatGuid could not be recovered — a duplicate thread is possible if one already existed.',
+                ? 'Shortcut ran but the new thread has not appeared in chat.db yet — ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID.'
+                : 'Shortcut ran. chat.db is unreadable (no Full Disk Access), so delivery could not be verified and the new chatGuid could not be recovered — ask the user to confirm in Messages.',
           });
         } catch (err) {
           if (!fallbackToIndividual) {
@@ -175,8 +227,8 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
         );
       }
 
-      // 3. Authorized failover: individual 1:1 sends.
-      const results = await fanOut(participants, text);
+      // 3. Authorized failover: individual 1:1 sends (self-handles already stripped).
+      const results = await fanOut(recipients, text);
       return jsonResult({
         method: 'individual-fanout',
         note: 'Sent as separate 1:1 messages (group path unavailable or failed). These are NOT a group thread.',

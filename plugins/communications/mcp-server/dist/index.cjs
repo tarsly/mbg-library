@@ -22273,6 +22273,41 @@ var init_chat_db = __esm({
           return (b.last_message_rowid ?? 0) - (a.last_message_rowid ?? 0);
         });
       }
+      /**
+       * The user's own handles (phones/emails), normalized. chat.db never lists
+       * the user in chat_handle_join, so any self-handle in a participant query
+       * must be filtered out or exact-matching can never succeed. Derived from
+       * chat.account_login, which is formatted like "P:+18015551234" or
+       * "E:user@icloud.com". Returns [] if the column/data is unavailable.
+       */
+      getSelfHandles() {
+        this.ensureOpen();
+        try {
+          const rows = this.db.prepare(
+            "SELECT DISTINCT account_login FROM chat WHERE account_login IS NOT NULL"
+          ).all();
+          const out = /* @__PURE__ */ new Set();
+          for (const r of rows) {
+            const raw = r.account_login.replace(/^[A-Za-z]:/, "").trim();
+            if (raw) out.add(normalizeHandle(raw));
+          }
+          return [...out];
+        } catch {
+          return [];
+        }
+      }
+      /** Number of messages sent BY the user in a chat. Used to verify delivery. */
+      countSentMessages(chatGuid) {
+        this.ensureOpen();
+        const row = this.db.prepare(`
+      SELECT COUNT(*) AS n
+      FROM message m
+      JOIN chat_message_join cmj ON cmj.message_id = m.rowid
+      JOIN chat c ON c.rowid = cmj.chat_id
+      WHERE c.guid = ? AND m.is_from_me = 1
+    `).get(chatGuid);
+        return row?.n ?? 0;
+      }
       close() {
         if (this.db) {
           this.db.close();
@@ -22577,6 +22612,20 @@ async function fanOut(recipients, text) {
   }
   return results;
 }
+function splitSelfHandles(chatDb, participants) {
+  let selfSet;
+  try {
+    selfSet = new Set(chatDb.getSelfHandles());
+  } catch {
+    return { others: participants, self: [] };
+  }
+  const others = [];
+  const self = [];
+  for (const p of participants) {
+    (selfSet.has(normalizeHandle(p)) ? self : others).push(p);
+  }
+  return others.length > 0 ? { others, self } : { others: participants, self: [] };
+}
 function registerTools(server, chatDb) {
   server.tool(
     "imessage_send",
@@ -22606,10 +22655,11 @@ function registerTools(server, chatDb) {
     "imessage_find_group",
     "Find existing chats containing ALL the given participants (2+ phone numbers/emails). Returns exact matches (participant set is precisely these people) first, then supersets (these people plus others). Use BEFORE any multi-recipient send \u2014 an existing thread beats creating anything.",
     {
-      participants: external_exports.array(external_exports.string().min(3)).min(2).max(30).describe("Phone numbers (any format) and/or emails. Do not include the sender.")
+      participants: external_exports.array(external_exports.string().min(3)).min(2).max(30).describe("Phone numbers (any format) and/or emails. Including the user's own number/email is fine \u2014 it is detected and excluded from matching (macOS never lists the sender as a chat participant).")
     },
     async ({ participants }) => {
-      const matches = chatDb.findChatsByParticipants(participants);
+      const { others, self } = splitSelfHandles(chatDb, participants);
+      const matches = chatDb.findChatsByParticipants(others);
       return {
         content: [
           {
@@ -22618,6 +22668,7 @@ function registerTools(server, chatDb) {
               {
                 count: matches.length,
                 groupShortcutInstalled: await groupShortcutInstalled(),
+                selfHandlesExcluded: self,
                 matches
               },
               null,
@@ -22632,15 +22683,18 @@ function registerTools(server, chatDb) {
     "imessage_send_group",
     'Send one message to multiple people as a GROUP thread. Order of attempts: (1) existing thread with exactly these participants via AppleScript; (2) if none, create the group via the "MBG Group Send" shortcut (requires one-time install by comm-imessage-fast-setup); (3) if that fails and fallbackToIndividual is true, send to each person individually. ALWAYS confirm mode (group vs individual) and failover with the user before calling.',
     {
-      participants: external_exports.array(external_exports.string().min(3)).min(2).max(30).describe("Phone numbers (E.164 preferred) and/or emails. Do not include the sender."),
+      participants: external_exports.array(external_exports.string().min(3)).min(2).max(30).describe("Phone numbers (E.164 preferred) and/or emails. Including the user's own number/email is fine \u2014 it is detected and stripped (the sender is implicitly in every thread; macOS never lists them as a participant)."),
       text: external_exports.string().min(1).describe("Message body"),
       fallbackToIndividual: external_exports.boolean().default(false).describe("If the group path fails, send to each recipient as separate 1:1 messages. Only set true with explicit user consent.")
     },
     async ({ participants, text, fallbackToIndividual }) => {
+      let recipients = participants;
       let dbAvailable = true;
       let existing = [];
       try {
-        existing = chatDb.findChatsByParticipants(participants).filter((m) => m.match === "exact");
+        const { others } = splitSelfHandles(chatDb, participants);
+        recipients = others;
+        existing = chatDb.findChatsByParticipants(recipients).filter((m) => m.match === "exact");
       } catch {
         dbAvailable = false;
       }
@@ -22656,19 +22710,32 @@ function registerTools(server, chatDb) {
       }
       if (await groupShortcutInstalled()) {
         try {
-          await sendGroupViaShortcut(participants, text);
+          await sendGroupViaShortcut(recipients, text);
           let chatGuid = null;
           if (dbAvailable) {
             for (let i = 0; i < 5 && !chatGuid; i++) {
               await sleep(2e3);
-              const found = chatDb.findChatsByParticipants(participants).filter((m) => m.match === "exact");
+              const found = chatDb.findChatsByParticipants(recipients).filter((m) => m.match === "exact");
               if (found.length > 0) chatGuid = found[0].chat_guid;
+            }
+          }
+          let delivery = "unknown";
+          if (chatGuid) {
+            delivery = "confirmed";
+            try {
+              if (chatDb.countSentMessages(chatGuid) === 0) {
+                await sendMessage(chatGuid, text);
+                delivery = "retried-via-applescript";
+              }
+            } catch {
+              delivery = "unknown";
             }
           }
           return jsonResult({
             method: "shortcut-created-group",
             chatGuid,
-            note: chatGuid ? "Group created and message sent. Reuse this chatGuid for future sends." : dbAvailable ? "Shortcut reported success but the new thread has not appeared in chat.db yet \u2014 ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID." : "Sent via shortcut. chat.db is unreadable (no Full Disk Access), so an existing thread could not be checked and the new chatGuid could not be recovered \u2014 a duplicate thread is possible if one already existed."
+            delivery,
+            note: chatGuid ? delivery === "retried-via-applescript" ? 'Group thread created, but the shortcut send was blocked (likely the one-time macOS "Allow \u2026 to send messages?" prompt) \u2014 re-sent directly to the new thread via AppleScript. Tell the user to approve the Shortcuts prompt with Always Allow so future first-sends go through cleanly.' : "Group created and message delivery confirmed. Reuse this chatGuid for future sends." : dbAvailable ? "Shortcut ran but the new thread has not appeared in chat.db yet \u2014 ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID." : "Shortcut ran. chat.db is unreadable (no Full Disk Access), so delivery could not be verified and the new chatGuid could not be recovered \u2014 ask the user to confirm in Messages."
           });
         } catch (err) {
           if (!fallbackToIndividual) {
@@ -22682,7 +22749,7 @@ function registerTools(server, chatDb) {
           `No existing group thread with these participants, and the "${GROUP_SHORTCUT_NAME}" shortcut is not installed. Options: run comm-imessage-fast-setup to install the shortcut, send individually (fallbackToIndividual), or have the user start the group manually in Messages once.`
         );
       }
-      const results = await fanOut(participants, text);
+      const results = await fanOut(recipients, text);
       return jsonResult({
         method: "individual-fanout",
         note: "Sent as separate 1:1 messages (group path unavailable or failed). These are NOT a group thread.",
@@ -22837,6 +22904,7 @@ var init_tools = __esm({
     "use strict";
     init_zod();
     init_filters();
+    init_chat_db();
     init_marker_store();
     init_applescript_sender();
     init_shortcuts_runner();

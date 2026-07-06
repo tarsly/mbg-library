@@ -235,6 +235,43 @@ export class ChatDb {
     });
   }
 
+  /**
+   * The user's own handles (phones/emails), normalized. chat.db never lists
+   * the user in chat_handle_join, so any self-handle in a participant query
+   * must be filtered out or exact-matching can never succeed. Derived from
+   * chat.account_login, which is formatted like "P:+18015551234" or
+   * "E:user@icloud.com". Returns [] if the column/data is unavailable.
+   */
+  getSelfHandles(): string[] {
+    this.ensureOpen();
+    try {
+      const rows = this.db!.prepare(
+        'SELECT DISTINCT account_login FROM chat WHERE account_login IS NOT NULL',
+      ).all() as Array<{ account_login: string }>;
+      const out = new Set<string>();
+      for (const r of rows) {
+        const raw = r.account_login.replace(/^[A-Za-z]:/, '').trim();
+        if (raw) out.add(normalizeHandle(raw));
+      }
+      return [...out];
+    } catch {
+      return [];
+    }
+  }
+
+  /** Number of messages sent BY the user in a chat. Used to verify delivery. */
+  countSentMessages(chatGuid: string): number {
+    this.ensureOpen();
+    const row = this.db!.prepare(`
+      SELECT COUNT(*) AS n
+      FROM message m
+      JOIN chat_message_join cmj ON cmj.message_id = m.rowid
+      JOIN chat c ON c.rowid = cmj.chat_id
+      WHERE c.guid = ? AND m.is_from_me = 1
+    `).get(chatGuid) as { n: number } | undefined;
+    return row?.n ?? 0;
+  }
+
   close(): void {
     if (this.db) {
       this.db.close();
