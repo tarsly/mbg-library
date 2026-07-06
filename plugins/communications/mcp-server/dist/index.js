@@ -11,11 +11,13 @@ const NODE_MAJOR_REQUIRED = 20;
 const FDA_HINT = [
     'Cannot open ~/Library/Messages/chat.db — macOS Full Disk Access is required.',
     '',
-    'Fix:',
-    '  System Settings → Privacy & Security → Full Disk Access → add your terminal app (e.g. Terminal, iTerm, Warp)',
-    '  Then quit and reopen the terminal so the permission takes effect.',
+    'Fix: System Settings → Privacy & Security → Full Disk Access, then add the app',
+    'that RUNS Claude (the MCP server inherits its permission):',
+    '  - Claude Code in a terminal → add that terminal app (Terminal, iTerm, Warp)',
+    '  - Claude Desktop / Cowork on this Mac → add Claude.app',
+    'Then FULLY quit that app (Cmd-Q) and reopen it.',
     '',
-    'Verify:',
+    'Verify (from a terminal that has FDA):',
     '  sqlite3 ~/Library/Messages/chat.db "SELECT 1;"',
 ].join('\n');
 function stderr(msg) {
