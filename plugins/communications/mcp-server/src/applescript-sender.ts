@@ -16,20 +16,16 @@ export async function sendMessage(chatGuid: string, text: string): Promise<void>
 
 /**
  * Sends an iMessage to a recipient (phone or email) rather than an existing chat GUID.
- * Tries modern participant syntax first, falls back to legacy buddy syntax.
+ * Targets the iMessage service explicitly first: "account 1" is whichever account
+ * sorts first, often the SMS/RCS relay — that sends green through the user's
+ * iPhone and fails outright when the phone is unreachable. Falls back to the
+ * first account only for recipients not reachable over iMessage.
  */
 export async function sendToRecipient(recipient: string, text: string): Promise<void> {
   const escapedText = escapeAppleScript(text);
   const escapedRecipient = escapeAppleScript(recipient);
 
-  const modernScript = [
-    'tell application "Messages"',
-    `  set targetBuddy to participant "${escapedRecipient}" of account 1`,
-    `  send "${escapedText}" to targetBuddy`,
-    'end tell',
-  ].join('\n');
-
-  const legacyScript = [
+  const imessageScript = [
     'tell application "Messages"',
     `  set targetService to 1st account whose service type = iMessage`,
     `  set targetBuddy to participant "${escapedRecipient}" of targetService`,
@@ -37,10 +33,17 @@ export async function sendToRecipient(recipient: string, text: string): Promise<
     'end tell',
   ].join('\n');
 
+  const anyAccountScript = [
+    'tell application "Messages"',
+    `  set targetBuddy to participant "${escapedRecipient}" of account 1`,
+    `  send "${escapedText}" to targetBuddy`,
+    'end tell',
+  ].join('\n');
+
   try {
-    await execFileAsync('osascript', ['-e', modernScript]);
+    await execFileAsync('osascript', ['-e', imessageScript]);
   } catch {
-    await execFileAsync('osascript', ['-e', legacyScript]);
+    await execFileAsync('osascript', ['-e', anyAccountScript]);
   }
 }
 
