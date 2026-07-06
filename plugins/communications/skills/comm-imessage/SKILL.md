@@ -1,3 +1,8 @@
+---
+name: "iMessage (Legacy)"
+description: "Legacy skill — use comm-imessage-fast instead for faster delivery (no BlueBubbles required). This version sends iMessages via the BlueBubbles MCP connector and is kept for compatibility. Use when the user says 'send iMessage via BlueBubbles', 'message [person] on iMessage via BlueBubbles', or needs to send to a contact managed through BlueBubbles."
+---
+
 # COMM-iMessage
 ## Send iMessages via BlueBubbles
 

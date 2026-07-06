@@ -1,6 +1,6 @@
 ---
 name: research-market
-description: "Market research — TAM/SAM/SOM, industry analysis, market trends, growth rates, competitive landscape, key players, market validation, niche research, or any request involving researching market size, trends, and opportunities for any industry, product, or service."
+description: "Market research — TAM/SAM/SOM, industry analysis, market trends, growth rates, competitive landscape, key players, market validation, niche research, or wants TAM/SAM/SOM estimates, industry trends, or a market validation summary for a niche or product idea."
 argument-hint: "[market/industry/niche] [--focus size/trends/opportunities/all] [--geography us/global/specific-region]"
 allowed-tools:
   - mcp__cloud-brain__search_notes

@@ -1,6 +1,6 @@
 ---
 name: eos-rocks
-description: "Manage quarterly EOS Rocks — the 3-7 most important priorities every leader commits to for the next 90 days. Add, update, complete, view status, or get coaching to take a vague goal and produce a SMART (Specific, Measurable, Attainable, Relevant, Time-bound) Rock. Targets ≥80% Rock completion per quarter. Use for setting Q rocks, rewriting a vague rock, checking rock status, marking a rock done, or any request involving EOS Rocks."
+description: "Manage quarterly EOS Rocks — the 3-7 most important priorities every leader commits to for the next 90 days. Add, update, complete, view status, or get coaching to take a vague goal and produce a SMART (Specific, Measurable, Attainable, Relevant, Time-bound) Rock. Targets ≥80% Rock completion per quarter. Use for setting Q rocks, rewriting a vague rock, checking rock status, marking a rock done, or needs to set Q rocks, rewrite a vague rock, check rock status, or mark a rock complete."
 argument-hint: "[add/update/complete/status/coach/list] [--owner name] [--quarter YYYY-QN] [--title text] [--status on-track/off-track/done] [--publish]"
 allowed-tools:
   - Bash

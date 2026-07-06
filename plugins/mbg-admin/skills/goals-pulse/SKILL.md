@@ -1,7 +1,7 @@
 ---
 name: goals-pulse
 description: >
-  Lightweight 5–10 minute goal alignment check-in for returning clients. Use when someone says "pulse check", "am I on track", "quick goals check", "how am I doing on my goals", "goals check-in", "check my progress", "quick check on my goals", "am I still aligned", "weekly goals check", "are my daily actions matching my goals", or wants a fast read on whether their current activity connects to their hierarchy. ALWAYS check for an existing goal hierarchy first — if none exists, redirect to 01 Goal Architect. Do NOT turn this into a full review; if deeper issues surface, recommend a full review session.
+  Lightweight 5–10 minute goal alignment check-in for returning clients. Use when someone says "pulse check", "am I on track", "quick goals check", "how am I doing on my goals", "goals check-in", "check my progress", "quick check on my goals", "am I still aligned", "weekly goals check", "are my daily actions matching my goals", or wants a fast read on whether their current activity connects to their hierarchy. ALWAYS check for an existing goal hierarchy first — if none exists, redirect to 01 Clarify Your Goals. Do NOT turn this into a full review; if deeper issues surface, recommend a full review session.
 ---
 
 # Goals Pulse
@@ -22,7 +22,7 @@ Read from Cloud Brain:
 
 **If `goals/goal-hierarchy` does not exist**, say:
 
-> "You haven't set up your goal hierarchy yet — that's the foundation this check-in builds on. It takes 30–45 minutes with 01 Goal Architect and is worth doing once. Want to do that now?"
+> "You haven't set up your goal hierarchy yet — that's the foundation this check-in builds on. It takes 30–45 minutes with 01 Clarify Your Goals and is worth doing once. Want to do that now?"
 
 Then stop.
 

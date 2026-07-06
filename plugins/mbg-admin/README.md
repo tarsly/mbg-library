@@ -21,14 +21,14 @@ A 5–10 minute goal alignment check-in. Compares what you actually worked on th
 
 **Trigger phrases:** "pulse check", "am I on track", "quick goals check", "how am I doing on my goals", "goals check-in", "check my progress", "weekly goals check", "are my daily actions matching my goals"
 
-**Requires:** A goal hierarchy saved by 01 Goal Architect (MBG Foundation). If none exists, Goals Pulse will prompt you to run Goal Architect first.
+**Requires:** A goal hierarchy saved by 01 Clarify Your Goals (Start Here plugin, foundation marketplace). If none exists, Goals Pulse will prompt you to run Clarify Your Goals first.
 
 **Recommended cadence:** Weekly, Monday morning before the week starts
 
 ---
 
 ### Update Blueprint
-Checks whether a newer version of the AI Unity Agent Platform is available, validates your license, and applies a non-destructive update. Skills get the latest version; your personal data (goals, preferences, project notes) is never touched.
+Checks whether a newer version of the MyBusinessGenie Platform is available, validates your license, and applies a non-destructive update. Skills get the latest version; your personal data (goals, preferences, project notes) is never touched.
 
 **Trigger phrases:** "update blueprint", "check for updates", "update AI OS", "update my skills", "is there a newer version", "upgrade my AI OS"
 
@@ -75,7 +75,7 @@ Goals Pulse is read-only except for optional small updates to quarterly prioriti
 
 ## How These Skills Grow in Value Over Time
 
-**Goals Pulse** gets smarter as your goal hierarchy evolves. After each annual Goal Architect session, the pulse check automatically reflects your new priorities — no reconfiguration needed.
+**Goals Pulse** gets smarter as your goal hierarchy evolves. After each annual Clarify Your Goals session, the pulse check automatically reflects your new priorities — no reconfiguration needed.
 
 **Update Blueprint** ensures every skill you've installed stays current with the latest MBG improvements. Run it monthly and your platform is always on the latest version.
 
@@ -91,4 +91,4 @@ Goals Pulse is read-only except for optional small updates to quarterly prioriti
 
 ## Companion Plugin
 
-This plugin works alongside **MBG Foundation**. Goals Pulse requires a goal hierarchy from 01 Goal Architect. If you haven't run MBG Foundation yet, start there.
+This plugin works alongside **Start Here** (foundation marketplace). Goals Pulse requires a goal hierarchy from 01 Clarify Your Goals. If you haven't run Start Here yet, start there.

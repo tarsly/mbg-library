@@ -1,6 +1,6 @@
 ---
 name: bizops-vendor-tracker
-description: "Track vendors and supplier relationships — add vendors, log contract terms, track renewal dates, monitor costs, flag upcoming renewals and unused subscriptions, and get a full vendor spend summary, or any request involving managing suppliers, contractors, subscriptions, or service providers."
+description: "Track vendors and supplier relationships — add vendors, log contract terms, track renewal dates, monitor costs, flag upcoming renewals and unused subscriptions, and get a full vendor spend summary, or needs to log a vendor contract, flag an upcoming renewal, or audit subscription spend."
 argument-hint: "[add/list/renew/audit/cancel] [vendor name] [--category software/contractor/supplier/service/subscription] [--cost amount] [--renewal-date YYYY-MM-DD]"
 allowed-tools:
   - Bash

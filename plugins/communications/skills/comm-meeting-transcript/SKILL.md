@@ -1,3 +1,8 @@
+---
+name: "Meeting Transcript"
+description: "Use when the user says '/meeting-transcript', 'process this transcript', 'debrief my meeting', or pastes a recording summary or rough notes and needs a full structured output. Extracts decisions, action items, follow-ups, open questions, and key insights into a clean debrief — and cross-references with any Meeting Prep brief saved for that meeting."
+---
+
 # COMM-Meeting-Transcript
 ## Meeting Transcript Processing
 

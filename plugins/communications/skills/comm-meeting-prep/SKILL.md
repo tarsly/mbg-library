@@ -1,3 +1,8 @@
+---
+name: "Meeting Prep"
+description: "Use when the user says '/meeting-prep', 'prep me for my meeting with [name]', 'I have a call with [person]', or needs to walk into any meeting fully prepared. Generates a complete brief: attendee research, structured agenda, talking points, anticipated objections with responses, questions to ask, and a ready-to-send follow-up template."
+---
+
 # COMM-Meeting-Prep
 ## Pre-Meeting Intelligence Brief
 

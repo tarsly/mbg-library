@@ -1,6 +1,6 @@
 ---
 name: bizops-lead-tracker
-description: "Track leads through pipeline stages — add, update, and manage leads, prospects, and deals. View pipeline status, follow-up reminders, deal stage tracking, lead reports, sales funnel management, or any request involving managing contacts through a sales pipeline."
+description: "Track leads through pipeline stages — add, update, and manage leads, prospects, and deals. View pipeline status, follow-up reminders, deal stage tracking, lead reports, sales funnel management, or needs to add a new prospect, update a deal stage, or see which leads need follow-up today."
 argument-hint: "[add/update/status/pipeline/follow-ups] [name] [--stage new/contacted/qualified/negotiating/closed-won/closed-lost] [--value amount] [--source where-from] [--next-action text] [--notes text] [--follow-up YYYY-MM-DD]"
 allowed-tools:
   - Bash

@@ -25,7 +25,7 @@
       "displayName": "Business Operations",
       "source": "./plugins/business-operations",
       "description": "A complete business operations toolkit for small business owners. Covers daily briefings, client onboarding, invoicing, pipeline management, hiring, financial snapshots, SOPs, travel planning, and more. Works across all industries.",
-      "version": "1.1.2",
+      "version": "1.1.3",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "operations", "productivity", "CRM", "finance", "hiring", "travel",
@@ -38,7 +38,7 @@
       "displayName": "Real Estate Investor",
       "source": "./plugins/real-estate-investor",
       "description": "Complete real estate investor acquisition toolkit — from first look to signed offer. Covers property research, deal analysis, rental strategy comparison, financial modeling, seller outreach, deal marketing, offer/LOI generation, and contract-to-close due diligence tracking. All skills share a common investor preferences profile so every analysis is calibrated to your buy box from the first run.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "real-estate", "investing", "deal-analysis", "rental", "cash-flow",
@@ -93,7 +93,7 @@
       "displayName": "AI Agents",
       "source": "./plugins/ai-agents",
       "description": "Build, activate, and manage a complete AI agent team for your business. Design your org chart, activate agents one at a time with the right tools and schedules, set up automated reporting, and build custom skills when off-the-shelf options don't fit. Includes guided tool selection — recommends MBG plugins, native connectors, and Composio so every agent can work autonomously without you needing to be present.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "ai-agents", "agent-team", "automation", "org-chart",
@@ -107,7 +107,7 @@
       "displayName": "MBG Admin",
       "source": "./plugins/mbg-admin",
       "description": "Ongoing system health for MBG clients. Three admin skills that keep your goals front of mind, your AI platform up to date, and your results visible on your cloud dashboard. Goals Pulse is a 5–10 minute weekly alignment check-in. Update Blueprint checks for and applies platform updates. Publish Dashboard sends any skill output to your mybusinessgenie.ai dashboard.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "admin", "maintenance", "goals-pulse", "update-blueprint",
@@ -122,7 +122,7 @@
       "displayName": "Brand Toolkit",
       "source": "./plugins/brand-toolkit",
       "description": "A complete brand identity and analysis system for small business owners and entrepreneurs. Set up your brand kit once — colors, fonts, logo, and voice — and get a professional brand board PDF. Run quarterly brand audits to measure your online presence, identify positioning gaps, and get a data-backed 30-day improvement plan. Brand data saved to your Cloud Brain automatically applies to all document and content skills.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "brand", "branding", "brand-kit", "brand-audit", "online-presence",
@@ -154,7 +154,7 @@
       "displayName": "Communications",
       "source": "./plugins/communications",
       "description": "A complete AI communications toolkit for busy professionals. Triage and organize overflowing inboxes, draft professional emails in your voice, walk into every meeting prepared, extract action items from transcripts, build negotiation strategies on demand, and automatically sync your PLAUD voice recordings to your Cloud Brain. Designed to run as an Executive Inbox Agent on a daily schedule — so your communications are handled before you even open your laptop.",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "email", "inbox", "communications", "meeting", "triage", "drafting",
@@ -182,7 +182,7 @@
       "displayName": "Market Intelligence",
       "source": "./plugins/market-intelligence",
       "description": "A suite of AI-powered research skills for business intelligence. Run competitor analyses, market sizing reports, strategic SWOT assessments, deep-dive topic research, and individual person profiles — all sourced from live web data, saved to your cloud brain, and personalized to your business over time. Designed for entrepreneurs, investors, and business operators who make high-stakes decisions and need fast, reliable intelligence.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "research", "competitor analysis", "market research", "SWOT",
@@ -213,7 +213,7 @@
       "displayName": "EOS Operator",
       "source": "./plugins/eos-operator",
       "description": "Run your business on EOS (the Entrepreneurial Operating System from Gino Wickman's Traction). Build your V/TO and Accountability Chart, set quarterly Rocks, track your weekly Scorecard, run Level 10 meetings with full agenda timing and IDS issue-solving, manage To-Dos and Issues, document core processes, score your team with the People Analyzer, and grade your company against the EOS Organizational Checkup. All data persists in your Cloud Brain so every meeting builds on the last.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": { "name": "MyBusinessGenie" },
       "keywords": [
         "eos", "traction", "entrepreneurial-operating-system", "rocks", "scorecard",

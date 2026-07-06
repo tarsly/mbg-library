@@ -1,6 +1,6 @@
 ---
 name: rei-deal-analyzer
-description: "Analyze real estate deals — cash flow, cap rate, cash-on-cash return, DSCR, creative finance, subject-to, seller finance, BRRRR, multi-family underwriting, financing comparisons, go/no-go recommendation, or any request involving evaluating whether a property deal makes financial sense."
+description: "Analyze real estate deals — cash flow, cap rate, cash-on-cash return, DSCR, creative finance, subject-to, seller finance, BRRRR, multi-family underwriting, financing comparisons, go/no-go recommendation, or needs a cash flow, cap rate, DSCR, or creative-finance analysis before deciding on a deal."
 argument-hint: "[property address or description] [--price amount] [--rent amount] [--down amount] [--type subto/seller-finance/flip/rental/brrrr] [--terms details]"
 allowed-tools:
   - Read

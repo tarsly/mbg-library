@@ -1,6 +1,6 @@
 ---
 name: bizops-project-tracker
-description: "Track multi-milestone business projects — create projects with phases and owners, update status, view active workload, flag blockers and overdue milestones, and get a project health report, or any request involving tracking internal initiatives, launches, builds, or multi-step projects from start to finish."
+description: "Track multi-milestone business projects — create projects with phases and owners, update status, view active workload, flag blockers and overdue milestones, and get a project health report, or needs to track milestones, flag blockers, or pull a project health report for an internal initiative."
 argument-hint: "[create/update/status/report/close] [project name] [--milestone name] [--owner person] [--due YYYY-MM-DD] [--status not-started/in-progress/complete/blocked]"
 allowed-tools:
   - Bash

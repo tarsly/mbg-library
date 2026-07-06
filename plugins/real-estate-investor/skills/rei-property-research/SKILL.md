@@ -1,6 +1,6 @@
 ---
 name: rei-property-research
-description: "Research any property address — ownership, tax assessment, sale history, comparable sales, estimated value, neighborhood analysis, school ratings, flood zones, crime stats, seller motivation signals, property profile, or any request involving comprehensive due diligence on a specific property."
+description: "Research any property address — ownership, tax assessment, sale history, comparable sales, estimated value, neighborhood analysis, school ratings, flood zones, crime stats, seller motivation signals, property profile, or needs ownership history, comparable sales, neighborhood data, or seller motivation signals on a specific address."
 argument-hint: "[property address] [--include comps/neighborhood/schools/crime/all]"
 allowed-tools:
   - Read

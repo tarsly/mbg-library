@@ -1,6 +1,6 @@
 ---
 name: eos-todos
-description: "Manage EOS To-Dos — the 7-day verb-led action items that come out of every L10. Each has one owner, one due date (≤7 days). Target ≥90% completion week-over-week. Auto-rolls 2+ week stalls into the Issues List. Use for adding a to-do, listing open to-dos, marking complete, weekly recap, or any request involving EOS-style 7-day action items."
+description: "Manage EOS To-Dos — the 7-day verb-led action items that come out of every L10. Each has one owner, one due date (≤7 days). Target ≥90% completion week-over-week. Auto-rolls 2+ week stalls into the Issues List. Use for adding a to-do, listing open to-dos, marking complete, weekly recap, or needs to add a to-do, list open items, mark one complete, or run a weekly recap from an L10."
 argument-hint: "[add/list/done/recap] [--owner name] [--action text] [--due YYYY-MM-DD] [--source-issue id]"
 allowed-tools:
   - Bash

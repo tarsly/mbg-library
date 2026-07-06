@@ -1,6 +1,6 @@
 ---
 name: bizops-people
-description: "Contact management — create, update, search, and query people entities in the brain. Ask 'who is [name]?' to look up contacts."
+description: "Use when the user wants to manage a contact — 'add [name] to my contacts', 'update [person]'s info', 'who is [name]?', or 'what's [name]'s email?'. Stores and retrieves contact details, relationship notes, and interaction history. Includes duplicate detection and contradiction flagging so contact records stay accurate over time."
 argument-hint: "[name] [--action create/update/search/list]"
 allowed-tools:
   - mcp__cloud-brain__write_note

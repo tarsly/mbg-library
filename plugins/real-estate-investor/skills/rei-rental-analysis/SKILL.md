@@ -1,6 +1,6 @@
 ---
 name: rei-rental-analysis
-description: "Rental market analysis — rent comps, Airbnb vs long-term rental, STR and midterm analysis, Section 8 rents, fair market rent, vacancy rates, rental strategy comparison, rental income estimates, 5-year income projections by strategy, or any request involving understanding what a property can earn as a rental."
+description: "Rental market analysis — rent comps, Airbnb vs long-term rental, STR and midterm analysis, Section 8 rents, fair market rent, vacancy rates, rental strategy comparison, rental income estimates, 5-year income projections by strategy, or wants to compare STR vs long-term rental income, check Section 8 rents, or project 5-year rental returns."
 argument-hint: "[address or area] [--beds 1-5] [--type sfh/mfh/condo/apartment] [--radius 1-10mi]"
 allowed-tools:
   - Read

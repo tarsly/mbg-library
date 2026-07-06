@@ -1,6 +1,6 @@
 ---
 name: rei-seller-outreach
-description: "Draft seller outreach — letters, text messages, voicemail scripts, emails, and cold call scripts for motivated sellers. Handles pre-foreclosure, probate, absentee owner, tired landlord, tax delinquent, code violations, vacant, divorce, estate, and batch outreach, or any request involving personalized communication to acquire real estate."
+description: "Draft seller outreach — letters, text messages, voicemail scripts, emails, and cold call scripts for motivated sellers. Handles pre-foreclosure, probate, absentee owner, tired landlord, tax delinquent, code violations, vacant, divorce, estate, and batch outreach, or wants to draft a letter, text, or call script for a motivated seller situation."
 argument-hint: "[seller name] [property address] [--method letter/text/email/voicemail/script/all] [--motivation distressed/divorce/relocation/tired-landlord/inherited/pre-foreclosure]"
 allowed-tools:
   - Read

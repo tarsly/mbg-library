@@ -1,16 +1,13 @@
 ---
 name: agent-designer
 description: >
-  Design a complete AI agent team for any business — guided interview, visual org chart, job
-  titles, job descriptions, persona naming, and activation roadmap. Use this skill whenever a
-  client wants to build an AI team, set up AI agents, design an org chart, or asks "what agents
-  should I have?", "help me organize my AI team", "set up agents for my company", "build my AI
-  staff", "design my team", "create agent personas", "staff my business with AI", or
-  "agent designer". Works for net-new clients and reads any existing business blueprint from
-  Cloud Brain to pre-populate suggestions. Handles single-company and multi-company setups.
-  Produces a visual org chart and saves the team roster to Cloud Brain for Agent Activator,
-  Agent Reporter, and Agent Viewer to use. Always run this skill first — it is the foundation
-  of the agent team system.
+  Use when the user wants to redesign, restructure, or expand an existing agent team — not
+  initial setup. Say "redesign my agent team", "add a new agent role", "reorganize how my
+  agents are structured", "update my AI org chart", or "I want to change my agent team".
+  For first-time agent team setup, use the start-here plugin's 03 Design Your AI Team skill
+  instead. This skill reads the existing team roster from Cloud Brain, proposes changes, and
+  updates the org chart and saved roster when approved. Handles adding new roles, removing
+  outdated ones, restructuring reporting lines, and updating responsibilities for any agent.
 ---
 
 # Agent Designer

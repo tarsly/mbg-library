@@ -1,6 +1,6 @@
 ---
 name: bizops-financial-snapshot
-description: "Executive financial summary — P&L, revenue by stream, expense breakdown, cash flow projection, burn rate, runway, margin analysis, profitability, financial forecast, and actionable recommendations, or any request involving understanding your financial position across businesses."
+description: "Executive financial summary — P&L, revenue by stream, expense breakdown, cash flow projection, burn rate, runway, margin analysis, profitability, financial forecast, and actionable recommendations, or needs a P&L summary, cash flow projection, burn rate, or margin analysis across one or more businesses."
 argument-hint: "[business-or-period] [--revenue amount] [--expenses amount] [--cash amount] [--businesses biz1,biz2]"
 allowed-tools:
   - Read

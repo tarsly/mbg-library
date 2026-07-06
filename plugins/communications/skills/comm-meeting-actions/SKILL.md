@@ -1,3 +1,8 @@
+---
+name: "Meeting to Actions"
+description: "Use when the user says '/meeting-actions', 'extract action items from my notes', 'convert this transcript to tasks', or pastes meeting notes and needs them turned into a structured task list. Outputs action items with owners and due dates, decisions made, follow-ups needed, and a shareable summary — faster than the full Meeting Transcript skill when the goal is just a clean task list."
+---
+
 # COMM-Meeting-Actions
 ## Structured Action Item Extraction
 

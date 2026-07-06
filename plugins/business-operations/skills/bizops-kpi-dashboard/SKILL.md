@@ -1,6 +1,6 @@
 ---
 name: bizops-kpi-dashboard
-description: "KPI tracking — define, update, and report on key performance indicators. Business scorecard, revenue tracking, conversion rates, deal metrics, content output, trend analysis, target setting, or any request involving tracking and reporting on business performance metrics."
+description: "KPI tracking — define, update, and report on key performance indicators. Business scorecard, revenue tracking, conversion rates, deal metrics, content output, trend analysis, target setting, or needs to define a KPI, log a new number, or pull a trend report across revenue, pipeline, or content metrics."
 argument-hint: "[setup/update/report] [--kpi name] [--value amount] [--target amount] [--category revenue/pipeline/content/operations/financial/personal]"
 allowed-tools:
   - Bash

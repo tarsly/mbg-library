@@ -1,6 +1,6 @@
 ---
 name: bizops-daily-brief
-description: "CEO-level daily briefing — today's priorities, fires, deadlines, project status, and focus areas pulled from goals, projects, calendar, and recent activity, or any request involving starting the day with a structured executive summary."
+description: "CEO-level daily briefing — today's priorities, fires, deadlines, project status, and focus areas pulled from goals, projects, calendar, and recent activity, or wants a CEO-level morning overview of priorities, deadlines, and fires from across their goals, projects, and recent activity."
 allowed-tools:
   - Read
   - Write

@@ -1,6 +1,6 @@
 ---
 name: bizops-sop-builder
-description: "Build SOPs — document processes, create standard operating procedures, runbooks, playbooks, workflow documentation, step-by-step guides, and repeatable checklists, or any request involving turning a described process into a formal, AI-executable procedure."
+description: "Build SOPs — document processes, create standard operating procedures, runbooks, playbooks, workflow documentation, step-by-step guides, and repeatable checklists, or needs to document a process, create a runbook, or turn a verbal description into a step-by-step SOP."
 argument-hint: "[process name or description] [--category deals/marketing/sales/operations/tech/training]"
 allowed-tools:
   - Bash

@@ -1,6 +1,6 @@
 ---
 name: eos-scorecard
-description: "Define and manage your EOS Scorecard — the 5-15 weekly leading-indicator numbers that give a true pulse of your business. Log weekly numbers, render a 13-week trailing view with sparklines and trend arrows, auto-flag off-track misses as Issues for IDS at your next L10. Coach mode suggests measurables by department (Sales/Marketing/Ops/Finance/People) and pushes back against lagging-only scorecards. Use for setting up a scorecard, logging this week's numbers, reading the scorecard report, or any request involving EOS measurables."
+description: "Define and manage your EOS Scorecard — the 5-15 weekly leading-indicator numbers that give a true pulse of your business. Log weekly numbers, render a 13-week trailing view with sparklines and trend arrows, auto-flag off-track misses as Issues for IDS at your next L10. Coach mode suggests measurables by department (Sales/Marketing/Ops/Finance/People) and pushes back against lagging-only scorecards. Use for setting up a scorecard, logging this week's numbers, reading the scorecard report, or needs to add a measurable, log this week's numbers, or pull a 13-week trailing scorecard report."
 argument-hint: "[setup/log/report/coach/add-measurable] [--measurable name] [--value number] [--week YYYY-WW] [--publish]"
 allowed-tools:
   - Bash

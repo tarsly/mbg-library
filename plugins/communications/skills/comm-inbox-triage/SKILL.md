@@ -1,3 +1,8 @@
+---
+name: "Inbox Triage"
+description: "Use when the user says '/inbox-triage', 'triage my inbox', 'process my emails', 'what needs attention today', or wants a structured email digest before starting the day. Categorizes every email into four urgency tiers, drafts responses for critical items, and surfaces a daily action-item list. Designed to run on a schedule as an Executive Inbox Agent so communications are handled before the user opens their laptop."
+---
+
 # COMM-Inbox-Triage
 ## AI Email Triage & Inbox Management
 

@@ -1,6 +1,6 @@
 ---
 name: rei-deal-marketing
-description: "Create deal marketing materials — flyers, one-pagers, listing descriptions, investor pitches, email blasts, social media posts, and deal summaries for real estate deals (wholesale, flip, creative finance), or any request involving promoting a deal to buyers, investors, or agents."
+description: "Create deal marketing materials — flyers, one-pagers, listing descriptions, investor pitches, email blasts, social media posts, and deal summaries for real estate deals (wholesale, flip, creative finance), or wants to create a flyer, pitch deck, or email blast for a specific deal."
 argument-hint: "[property address or deal description] [--price amount] [--type wholesale/flip/seller-finance/subto/rental] [--audience buyers/investors/agents]"
 allowed-tools:
   - Read

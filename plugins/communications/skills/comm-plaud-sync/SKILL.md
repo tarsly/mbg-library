@@ -1,3 +1,8 @@
+---
+name: "Plaud Sync"
+description: "Use when the user says '/plaud-sync', 'sync my PLAUD', 'sync my voice recordings', or wants to pull recent PLAUD recordings into Cloud Brain. Calls the Plaud MCP directly, classifies each recording by domain (professional, personal, project-specific, research), extracts action items and insights, and routes structured notes to the right Cloud Brain folders. Designed to run on a daily or weekly schedule as part of a communications agent workflow."
+---
+
 # COMM-Plaud-Sync
 ## PLAUD Voice Recording Sync
 

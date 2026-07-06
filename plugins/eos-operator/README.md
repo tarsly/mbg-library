@@ -60,7 +60,7 @@ Plus the **EOS Organizational Checkup** score from `eos-health-check` (target: 8
 
 Every EOS skill stores state in your Cloud Brain (folder: `eos`). Skills cross-read each other on every invocation — so when you run `/eos-level10`, the meeting agenda already has your live scorecard numbers, current rock status, last week's to-dos, and the issues list ready to IDS.
 
-Skills also read your existing onboarding context if you've gone through the system 01 Goal Architect — `business blueprint`, `goal-hierarchy`, `quarterly-priorities`, and `language-and-frameworks` notes are auto-loaded so you don't re-enter your company name, industry, or current commitments.
+Skills also read your existing onboarding context if you've run 01 Clarify Your Goals — `business blueprint`, `goal-hierarchy`, `quarterly-priorities`, and `language-and-frameworks` notes are auto-loaded so you don't re-enter your company name, industry, or current commitments.
 
 ---
 

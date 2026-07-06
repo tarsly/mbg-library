@@ -1,6 +1,6 @@
 ---
 name: research-competitor
-description: "Competitor analysis — research competitors, pricing, features, gaps, market positioning, battle cards, competitive audit, landscape analysis, or any request involving understanding the competitive environment for a business, product, or market."
+description: "Competitor analysis — research competitors, pricing, features, gaps, market positioning, battle cards, competitive audit, landscape analysis, or needs pricing comparisons, a feature gap analysis, a battle card, or a competitive positioning summary."
 argument-hint: "[business/product name] [--industry sector] [--competitors name1,name2,name3]"
 allowed-tools:
   - mcp__cloud-brain__search_notes

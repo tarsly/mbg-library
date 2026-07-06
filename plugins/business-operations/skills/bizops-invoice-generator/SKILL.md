@@ -1,6 +1,6 @@
 ---
 name: bizops-invoice-generator
-description: This skill should be used when the user asks to "create an invoice", "generate an invoice", "make an invoice", "invoice a client", "bill a client", "send an invoice", "invoice for services", "billing", "create a bill", "generate a bill", "invoice template", "new invoice", "invoice number", "payment due", "invoice for {client name}", "charge for", "bill for", "create receipt", or anything related to generating, creating, or managing invoices and billing documents.
+description: "Use when the user needs to generate a professional invoice — say 'create an invoice for [client]', 'bill [name] for [amount]', 'invoice [client] for services', or 'make an invoice'. Collects client info, line items, and rates, then outputs a formatted invoice ready to send — saved to Cloud Brain and written as a print-ready HTML file. Also handles updating existing invoices and tracking payment status."
 argument-hint: "[client name] [amount or line items] [--type connection/tc/consulting/custom] [--description service details] [--due-days 30] [--tax-rate 0] [--currency USD/EUR/GBP/CAD/AUD/MXN] [--notes text]"
 allowed-tools:
   - Read

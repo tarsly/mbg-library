@@ -1,6 +1,6 @@
 ---
 name: bizops-client-onboarding
-description: "Onboard new clients — create contact records, project files, welcome materials, onboarding checklists, and intake workflows, or any request involving setting up everything for a new client relationship."
+description: "Onboard new clients — create contact records, project files, welcome materials, onboarding checklists, and intake workflows, or needs to set up a contact record, project file, welcome message, or intake checklist for a new client."
 argument-hint: "[client name] [--type consulting/retainer/project/partner/subscriber/student] [--company name] [--email address] [--phone number] [--service description] [--value amount]"
 allowed-tools:
   - Read

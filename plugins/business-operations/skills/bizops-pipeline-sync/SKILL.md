@@ -1,6 +1,6 @@
 ---
 name: bizops-pipeline-sync
-description: "Pipeline intelligence — deal velocity, stale deals, revenue forecast, pipeline by stage, CRM sync, projected revenue, deal flow report, top deals, pipeline health, or any request involving viewing, analyzing, or reporting on deal pipeline and CRM data."
+description: "Pipeline intelligence — deal velocity, stale deals, revenue forecast, pipeline by stage, CRM sync, projected revenue, deal flow report, top deals, pipeline health, or needs a revenue forecast, stale-deal report, or pipeline-by-stage breakdown."
 argument-hint: "[pipeline-name] [--stage new/contacted/qualified/negotiating/proposal-sent/closed-won/closed-lost] [--stale-only] [--forecast] [--top-deals]"
 allowed-tools:
   - Bash

@@ -36,7 +36,7 @@ EOS Operator is the complete Entrepreneurial Operating System toolkit for busine
 |---|---|---|
 | All EOS skills | EOS company preferences | `brain/preferences/eos-company-preferences` |
 | All EOS skills | Business blueprint (from system 01 onboarding) | `business blueprint` (cloud-brain search) |
-| `eos-vto-builder`, `eos-rocks` | Goal hierarchy + quarterly priorities (from 01 Goal Architect) | `goal-hierarchy`, `quarterly-priorities` |
+| `eos-vto-builder`, `eos-rocks` | Goal hierarchy + quarterly priorities (from 01 Clarify Your Goals) | `goal-hierarchy`, `quarterly-priorities` |
 | All EOS skills | Language and framework preference (EOS vs plain) | `preferences/language-and-frameworks` |
 
 No skill in this plugin maintains its own standalone preferences file — they all share `eos-company-preferences`. If the user has gone through the system 01 onboarding, the EOS skills pre-fill from those notes and confirm rather than re-asking.

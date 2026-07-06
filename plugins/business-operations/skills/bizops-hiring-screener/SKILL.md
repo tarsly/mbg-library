@@ -1,6 +1,6 @@
 ---
 name: bizops-hiring-screener
-description: "Build hiring packages — job descriptions, ideal candidate profiles, screening questions, interview scorecards, red/green flags, offer letter templates, and onboarding checklists for any role (VA, contractor, full-time), or any request involving recruitment and hiring workflows."
+description: "Build hiring packages — job descriptions, ideal candidate profiles, screening questions, interview scorecards, red/green flags, offer letter templates, and onboarding checklists for any role (VA, contractor, full-time), or needs to write a job description, create screening questions, or build a scorecard for any role."
 argument-hint: "[role description] [--type fulltime/parttime/contract/freelance] [--remote yes/no/hybrid] [--budget salary-range]"
 allowed-tools:
   - Read

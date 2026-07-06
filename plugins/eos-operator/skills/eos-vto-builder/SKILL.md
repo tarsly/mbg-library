@@ -1,6 +1,6 @@
 ---
 name: eos-vto-builder
-description: "Build or refresh your EOS V/TO (Vision/Traction Organizer) — the 2-page document that captures Core Values, Core Focus, 10-Year Target, Marketing Strategy, 3-Year Picture, 1-Year Plan, Quarterly Rocks, and Issues. Use for vision sessions, annual planning, quarterly V/TO review, core values discovery, 3-year picture drafts, 10-year BHAG, marketing strategy (Three Uniques, Proven Process, Guarantee), or any request involving the EOS V/TO document."
+description: "Build or refresh your EOS V/TO (Vision/Traction Organizer) — the 2-page document that captures Core Values, Core Focus, 10-Year Target, Marketing Strategy, 3-Year Picture, 1-Year Plan, Quarterly Rocks, and Issues. Use for vision sessions, annual planning, quarterly V/TO review, core values discovery, 3-year picture drafts, 10-year BHAG, marketing strategy (Three Uniques, Proven Process, Guarantee), or needs to build their V/TO, update a section, or run a quarterly vision review."
 argument-hint: "[build/refresh/view/section <name>] [--publish]"
 allowed-tools:
   - Bash

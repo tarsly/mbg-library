@@ -1,6 +1,6 @@
 ---
 name: MKT-brand-audit
-description: "Brand audit — analyze online presence across social media, website, and search. Gap analysis, competitor positioning, content pillar recommendations, bio and tagline suggestions, 30-day improvement plan, or any request involving evaluating and strengthening a personal or business brand."
+description: "Brand audit — analyze online presence across social media, website, and search. Gap analysis, competitor positioning, content pillar recommendations, bio and tagline suggestions, 30-day improvement plan, or wants a data-backed assessment of their online presence and a 30-day improvement plan."
 allowed-tools:
   - Read
   - Write

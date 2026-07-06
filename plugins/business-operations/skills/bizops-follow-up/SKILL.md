@@ -1,6 +1,6 @@
 ---
 name: bizops-follow-up
-description: "Track follow-ups and commitments — add, list, complete, and get reminders for promises, deadlines, open loops, pending items, accountability checks, overdue tasks, or any request involving tracking what you owe people and what you are waiting on."
+description: "Track follow-ups and commitments — add, list, complete, and get reminders for promises, deadlines, open loops, pending items, accountability checks, overdue tasks, or needs to log a commitment, check what's overdue, or see everything they're waiting on from others."
 argument-hint: "[add/list/done/remind/nudge] [details]"
 allowed-tools:
   - Bash

@@ -1,6 +1,6 @@
 ---
 name: eos-accountability-chart
-description: "Build, view, and update your EOS Accountability Chart — functional seats (not titles), top-5 roles per seat, the Visionary/Integrator structure, GWC (Get it / Want it / Capacity) ratings per seat, and staffing tags (human / AI / mixed / open). Hands off open or AI-eligible seats to /agent-designer. Use for org chart design, seat definition, right person / right seat decisions, GWC assessments, or any request involving the EOS accountability chart."
+description: "Build, view, and update your EOS Accountability Chart — functional seats (not titles), top-5 roles per seat, the Visionary/Integrator structure, GWC (Get it / Want it / Capacity) ratings per seat, and staffing tags (human / AI / mixed / open). Hands off open or AI-eligible seats to /agent-designer. Use for org chart design, seat definition, right person / right seat decisions, GWC assessments, or needs to define seats, assign people, run a GWC assessment, or hand off open seats to the agent designer."
 argument-hint: "[build/view/add-seat/place-person/gwc/handoff] [--seat name] [--person name] [--staffing human/ai/mixed/open] [--publish]"
 allowed-tools:
   - Bash

@@ -1,6 +1,6 @@
 ---
 name: bizops-travel-plan
-description: "Plan trips — flights, hotel recommendations, daily itinerary, ground transportation, restaurant suggestions, packing checklist, pre-trip timeline, conference travel, business trips, road trips, or any request involving travel logistics and trip preparation."
+description: "Plan trips — flights, hotel recommendations, daily itinerary, ground transportation, restaurant suggestions, packing checklist, pre-trip timeline, conference travel, business trips, road trips, or needs to plan flights, hotel options, a daily itinerary, or a packing checklist for an upcoming trip."
 argument-hint: "[destination] [dates] [purpose] [--budget low/mid/high] [--focus flights/hotels/food/packing/itinerary] [--travelers number]"
 allowed-tools:
   - Read
@@ -342,7 +342,7 @@ Assemble everything into a single document:
 
 ---
 
-*Trip brief generated {date} by AI Unity Agent Platform — Travel Planner.*
+*Trip brief generated {date} by MyBusinessGenie Platform — Travel Planner.*
 ```
 
 Save to Cloud Brain using `write_note` (project: "brain", folder: "research", title: "travel-{destination-slug}-{YYYY-MM-DD}")

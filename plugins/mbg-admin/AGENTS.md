@@ -15,7 +15,7 @@ MBG Admin keeps the MBG AI system running well between major setup sessions. It 
 | Skill | Trigger Phrases | What It Does |
 |---|---|---|
 | `goals-pulse` | "pulse check", "am I on track", "quick goals check", "how am I doing on my goals", "goals check-in", "weekly goals check", "are my daily actions matching my goals" | 5–10 minute goal alignment check-in — compares current week's activity to quarterly priorities and keystone goal; flags drift; surfaces one closing insight |
-| `update-blueprint` | "update blueprint", "check for updates", "update AI OS", "update my skills", "is there a newer version", "upgrade my AI OS" | Checks for a newer version of the AI Unity Agent Platform, validates license, and applies a non-destructive update |
+| `update-blueprint` | "update blueprint", "check for updates", "update AI OS", "update my skills", "is there a newer version", "upgrade my AI OS" | Checks for a newer version of the MyBusinessGenie Platform, validates license, and applies a non-destructive update |
 | `publish-dashboard` | "publish this", "send to dashboard", "add to my dashboard", "share to cloud" | Publishes any skill output to the client's cloud dashboard on mybusinessgenie.ai as a report card; pairs automatically with Goals Pulse and Update Blueprint |
 
 ---
@@ -27,7 +27,7 @@ MBG Admin keeps the MBG AI system running well between major setup sessions. It 
 | `goals-pulse` | Goal hierarchy, quarterly priorities, language/framework preference | `goals/goal-hierarchy`, `goals/quarterly-priorities`, `preferences/language-and-frameworks` |
 | `update-blueprint` | Version info, license | System files (version.json, .aios-license.json) |
 
-No skill in this plugin maintains its own standalone preferences file. Goals Pulse reads from the goal hierarchy established by MBG Foundation's 01 Goal Architect. Publish Dashboard reads the agent persona via the cloud-dashboard MCP at publish time.
+No skill in this plugin maintains its own standalone preferences file. Goals Pulse reads from the goal hierarchy established by the Start Here plugin's 01 Clarify Your Goals. Publish Dashboard reads the agent persona via the cloud-dashboard MCP at publish time.
 
 ---
 
@@ -54,7 +54,7 @@ Clients who prefer manual control can run either skill any time by typing the tr
 
 | Task | Skill | Suggested Schedule | Notes |
 |---|---|---|---|
-| Weekly goal alignment check-in | `goals-pulse` | Weekly, Monday 7:00 AM | Requires goal hierarchy from 01 Goal Architect to be set up first |
+| Weekly goal alignment check-in | `goals-pulse` | Weekly, Monday 7:00 AM | Requires goal hierarchy from 01 Clarify Your Goals to be set up first |
 | Monthly platform update check | `update-blueprint` | Monthly, 1st of month, 6:00 AM | Non-destructive — skips if already on latest version |
 | Publish Goals Pulse to dashboard | `publish-dashboard` | After each Goals Pulse run | Paired — runs at end of Goals Pulse automatically |
 | Publish Update Blueprint to dashboard | `publish-dashboard` | After each Update Blueprint run | Paired — runs at end of Update Blueprint automatically |

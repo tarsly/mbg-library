@@ -1,6 +1,6 @@
 ---
 name: research-deep
-description: "Deep research — comprehensive, web-sourced reports on any topic. Industry analysis, trend analysis, statistics, market research, intelligence reports, or any request involving thorough investigation and research compilation."
+description: "Deep research — comprehensive, web-sourced reports on any topic. Industry analysis, trend analysis, statistics, market research, intelligence reports, or wants a comprehensive, web-sourced report on a company, person, market, or strategic question."
 argument-hint: "[topic or question] [--depth quick/standard/deep] [--save true/false]"
 allowed-tools:
   - mcp__cloud-brain__search_notes

@@ -1,6 +1,6 @@
 ---
 name: bizops-weekly-review
-description: "Weekly review — recap what got done, what slipped, assess goal progress, weekly accountability check, and plan next week's priorities, or any request involving reviewing the past week and planning ahead."
+description: "Weekly review — recap what got done, what slipped, assess goal progress, weekly accountability check, and plan next week's priorities, or needs to recap what got done, assess goal progress, and plan the coming week's top priorities."
 argument-hint: "[--week YYYY-MM-DD] [--plan-next true/false]"
 allowed-tools:
   - mcp__cloud-brain__search_notes

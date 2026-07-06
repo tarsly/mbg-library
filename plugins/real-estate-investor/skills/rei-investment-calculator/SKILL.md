@@ -1,6 +1,6 @@
 ---
 name: rei-investment-calculator
-description: "Deep real estate financial modeling — BRRRR, flip, buy-and-hold projections, seller finance amortization, lease-option analysis, refinance analysis, wrap mortgage, subject-to, amortization tables, equity build-up projections, multi-scenario comparisons, depreciation and cost segregation estimates, balloon payment calculations, or any request involving detailed financial projections for real estate."
+description: "Deep real estate financial modeling — BRRRR, flip, buy-and-hold projections, seller finance amortization, lease-option analysis, refinance analysis, wrap mortgage, subject-to, amortization tables, equity build-up projections, multi-scenario comparisons, depreciation and cost segregation estimates, balloon payment calculations, or needs an amortization table, equity build-up projection, or multi-scenario comparison for a specific deal."
 argument-hint: "[strategy: brrrr/flip/hold/seller-finance/subto/wrap/lease-option/refi] [--price amount] [--arv amount] [--rent amount] [--rehab amount] [--rate percentage] [--term years]"
 allowed-tools:
   - Read

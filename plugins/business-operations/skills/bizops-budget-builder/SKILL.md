@@ -1,6 +1,6 @@
 ---
 name: bizops-budget-builder
-description: "Build and track a business budget — create annual or quarterly budgets, log actuals vs. plan, analyze variances, flag overspend, and get recommendations to improve financial performance, or any request involving building a budget, tracking spend, or comparing actual results to targets."
+description: "Build and track a business budget — create annual or quarterly budgets, log actuals vs. plan, analyze variances, flag overspend, and get recommendations to improve financial performance, or needs to set up a budget, log actuals against plan, or identify where spend is off track."
 argument-hint: "[setup/update/report/variance] [--period annual/quarterly/monthly] [--category revenue/expenses/both]"
 allowed-tools:
   - Bash

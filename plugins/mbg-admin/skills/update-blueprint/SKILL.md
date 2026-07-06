@@ -1,14 +1,14 @@
 ---
 name: update-blueprint
 description: >
-  Checks for a newer version of the AI Unity Agent Platform, validates license, and applies a non-destructive update. Use when someone says "update blueprint", "check for updates", "update AI OS", "update my skills", "is there a newer version", "upgrade my AI OS", or wants to check for and apply updates to the MBG platform.
+  Checks for a newer version of the MyBusinessGenie Platform, validates license, and applies a non-destructive update. Use when someone says "update blueprint", "check for updates", "update AI OS", "update my skills", "is there a newer version", "upgrade my AI OS", or wants to check for and apply updates to the MBG platform.
 ---
 
 # Update Blueprint
 
 ## Overview
 
-Checks if a newer version of the AI Unity Agent Platform is available, downloads it, validates the local license, and applies a non-destructive update. User data is never overwritten — only skill files and structural templates are updated.
+Checks if a newer version of the MyBusinessGenie Platform is available, downloads it, validates the local license, and applies a non-destructive update. User data is never overwritten — only skill files and structural templates are updated.
 
 ---
 
@@ -50,7 +50,7 @@ Read `~/.claude/.aios-license.json` and verify:
 1. The file exists
 2. It contains a valid `keyPrefix`, `machineId`, `tierId`, and `activatedAt`
 
-If the license receipt is missing or invalid, report: "License not found. Please run the AI Unity Agent Platform installer to activate your license." and stop.
+If the license receipt is missing or invalid, report: "License not found. Please run the MyBusinessGenie Platform installer to activate your license." and stop.
 
 ### Step 4: Download Update Payload
 

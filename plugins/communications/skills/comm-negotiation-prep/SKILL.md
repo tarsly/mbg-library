@@ -1,3 +1,8 @@
+---
+name: "Negotiation Prep"
+description: "Use when the user says '/negotiation-prep', 'help me prepare for a negotiation', 'prep my BATNA for [deal]', 'I'm negotiating [contract/salary/terms]', or needs a full strategy before any high-stakes conversation. Delivers BATNA analysis, leverage mapping, counterparty research, objection scripts, and a step-by-step conversation flow guide. Covers salary, vendor contracts, deal terms, pricing, partnerships, and real estate negotiations."
+---
+
 # COMM-Negotiation-Prep
 ## Negotiation Strategy & Preparation
 

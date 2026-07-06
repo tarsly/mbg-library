@@ -1,3 +1,8 @@
+---
+name: "Email Drafter"
+description: "Use when the user says '/email-drafter', 'draft an email', 'write an email to [person]', 'cold outreach to [name]', 'follow-up email for [deal]', or needs to compose a professional email for any business situation. Drafts in the user's voice and outputs a copy-ready email with subject line, body, and signature — covering cold outreach, follow-ups, proposals, introductions, thank-yous, negotiation emails, and investor outreach."
+---
+
 # COMM-Email-Drafter
 ## Professional Email Drafting
 
