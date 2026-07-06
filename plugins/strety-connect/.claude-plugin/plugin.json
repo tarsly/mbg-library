@@ -1,8 +1,8 @@
 {
   "name": "strety-connect",
   "displayName": "Strety Connect",
-  "version": "1.0.0",
-  "description": "Connect Claude to Strety, the EOS software your team already runs on. Manage To-Dos, Rocks (Goals), Scorecard metrics, Issues, and Headlines live via the Strety API; build a pre-L10 prep pack from real team data; and mirror Strety into Cloud Brain so the EOS Operator plugin works from live numbers. OAuth setup is a guided one-time flow — tokens stay local, auto-refreshed.",
+  "version": "1.0.1",
+  "description": "Connect Claude to Strety, the EOS software your team already runs on. Manage To-Dos, Rocks (Goals), Scorecard metrics, Issues, and Headlines live via the Strety API; build a pre-L10 prep pack from real team data; and mirror Strety into Cloud Brain so the EOS Operator plugin works from live numbers. OAuth setup is a guided one-time flow \u2014 tokens stay local, auto-refreshed.",
   "author": {
     "name": "MyBusinessGenie"
   },
@@ -34,7 +34,13 @@
     "oauth"
   ],
   "integrates_with": [
-    { "plugin": "eos-operator", "type": "workflow-handoff" },
-    { "plugin": "business-operations", "type": "see-also" }
+    {
+      "plugin": "eos-operator",
+      "type": "workflow-handoff"
+    },
+    {
+      "plugin": "business-operations",
+      "type": "see-also"
+    }
   ]
 }

@@ -69,7 +69,7 @@ request() {
     local out http retry
     out=$(curl -s -w '\n%{http_code}' -X "$method" "$url" \
       -H "Authorization: Bearer $(cred access_token)" \
-      -H "Accept: application/vnd.api+json" "${body_args[@]:-}")
+      -H "Accept: application/vnd.api+json" ${body_args[@]+"${body_args[@]}"})
     http=$(echo "$out" | tail -1)
     case "$http" in
       2*) echo "$out" | sed '$d'; return 0 ;;
