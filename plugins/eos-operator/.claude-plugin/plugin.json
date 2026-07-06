@@ -1,7 +1,7 @@
 {
   "name": "eos-operator",
   "displayName": "EOS Operator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Run your business on EOS (the Entrepreneurial Operating System from Gino Wickman's Traction). Build your V/TO and Accountability Chart, set quarterly Rocks, track your weekly Scorecard, run Level 10 meetings with full agenda timing and IDS issue-solving, manage To-Dos and Issues, document core processes, score your team with the People Analyzer, and grade your company against the EOS Organizational Checkup. All data persists in your Cloud Brain so every meeting builds on the last.",
   "author": {
     "name": "MyBusinessGenie"
@@ -37,9 +37,25 @@
     "business-operations"
   ],
   "integrates_with": [
-    { "plugin": "ai-agents", "type": "see-also" },
-    { "plugin": "brain-coach", "type": "see-also" },
-    { "plugin": "business-operations", "type": "see-also" },
-    { "plugin": "mbg-admin", "type": "see-also" }
+    {
+      "plugin": "ai-agents",
+      "type": "see-also"
+    },
+    {
+      "plugin": "brain-coach",
+      "type": "see-also"
+    },
+    {
+      "plugin": "business-operations",
+      "type": "see-also"
+    },
+    {
+      "plugin": "mbg-admin",
+      "type": "see-also"
+    },
+    {
+      "plugin": "strety-connect",
+      "type": "workflow-handoff"
+    }
   ]
 }
