@@ -119,6 +119,35 @@ imessage_search_chats(query=".", limit=1)
   - `MCP server not connected` → Claude wasn't restarted after `setup.sh`. Ask user to fully quit and reopen Claude.
   - `Node.js 20+ required` → Node version too old. Redo step 2.
 
+### 6. Optional — install the group-send shortcut
+
+Only needed if the user wants to **create new group threads** (sending to an existing group, single recipients, and individual fan-out all work without it). Messages' AppleScript API cannot create group chats; the plugin bridges through an Apple Shortcuts workflow instead.
+
+1. Check whether it's already installed:
+   ```bash
+   shortcuts list | grep -x "MBG Group Send"
+   ```
+   If it prints the name, skip this step.
+2. Open the signed shortcut that ships with the plugin:
+   ```bash
+   open "<plugin_root>/mcp-server/shortcuts/MBG Group Send.shortcut"
+   ```
+   The Shortcuts app opens an import preview — tell the user to click **Add Shortcut**. Do not rename it: the MCP server looks it up by the exact name "MBG Group Send".
+3. Verify with `shortcuts list | grep -x "MBG Group Send"` again.
+4. First live run may pop a one-time Shortcuts permission prompt ("Allow 'MBG Group Send' to send messages?") — tell the user to click **Always Allow**.
+
+**If the import fails or the shortcut misbehaves**, the user can build it by hand in the Shortcuts app (2 minutes, 5 actions) — name it exactly `MBG Group Send`:
+
+| # | Action | Configuration |
+|---|--------|---------------|
+| 1 | Split Text | Text: **Shortcut Input** · Separator: Custom · `\|\|\|MBG\|\|\|` |
+| 2 | Get Item from List | **Item At Index** 1 of Split Text |
+| 3 | Split Text | Text: **Item from List** (step 2) · Separator: Custom · `,` |
+| 4 | Get Item from List | **Item At Index** 2 of the FIRST Split Text (step 1) |
+| 5 | Send Message | Message: **Item from List** (step 4) · Recipients: **Split Text** (step 3) · "Show When Run" OFF |
+
+Also enable Shortcuts → Settings → Advanced → **Allow Running Scripts**.
+
 ---
 
 ## What this skill does NOT do

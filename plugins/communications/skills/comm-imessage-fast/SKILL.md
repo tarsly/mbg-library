@@ -32,11 +32,14 @@ Three things must be true on the user's Mac. If any check fails, **invoke the `c
 
 ## Available MCP Tools
 
-The `imessage-fast` MCP server exposes six tools. Use them in this order for the common cases below.
+The `imessage-fast` MCP server exposes nine tools. Use them in this order for the common cases below.
 
 | Tool | Purpose | Notes |
 |---|---|---|
 | `imessage_search_chats` | Find a chat by display name, GUID, or participant handle | Use when the user names a recipient by name and you need the phone/email/chatGuid |
+| `imessage_find_group` | Find existing chats containing ALL given participants (2+) | Always call this first for multi-recipient sends — exact matches beat creating anything. Also reports whether the group-send shortcut is installed |
+| `imessage_send_group` | Send to multiple people as one group thread | Uses an existing exact-match thread, else creates the group via the "MBG Group Send" shortcut. `fallbackToIndividual` only with explicit user consent |
+| `imessage_send_individual` | Send the same message to multiple people as separate 1:1s | Explicitly NOT a group thread. Reports per-recipient success/failure |
 | `imessage_read_chat` | Read the most recent messages in a specific chat | Returns both sent and received |
 | `imessage_poll_new` | Return new inbound messages since the persisted marker, then advance the marker | Use for "what's new?" — the marker file at `~/Library/Application Support/comm-imessage-fast/state.json` persists across sessions |
 | `imessage_peek_new` | Same as `poll_new` but does not advance the marker | Use for inspection without consuming |
@@ -93,6 +96,30 @@ At the start of the skill:
 2. From the search results, group chats will typically have a non-null `display_name`. Ask the user to confirm the right group if multiple match.
 3. Once confirmed, use `imessage_send` with `chatGuid` set to the group's GUID.
 
+### "Text Emma and Tate that dinner moved to 7" (multiple recipients)
+
+**Never assume group vs individual — always ask.** The same two numbers can mean "one group thread" or "two private texts," and they are very different sends.
+
+1. Resolve names to numbers/emails (Cloud Brain shortcuts, then `imessage_search_chats`).
+2. Call `imessage_find_group` with all participants. Note whether an exact-match thread exists and whether `groupShortcutInstalled` is true.
+3. Ask the disambiguation question (mandatory, ONE message):
+   > "Send this as a **group thread** (everyone sees each other and the replies) or **individually** (separate private 1:1 texts)?"
+   - If an exact-match thread exists, say so: "You already have a group thread with exactly these people — I'd reuse it."
+   - If no thread exists and the shortcut is NOT installed, say group requires a one-time setup (`comm-imessage-fast-setup`) or they can pick individual.
+4. If they chose **group** and a new thread would need to be created, also ask: "If the group send fails, want me to fall back to sending individually, or stop and tell you?"
+5. Confirmation gate (mandatory — extends the standard rule):
+   ```
+   READY TO SEND:
+     To:       Emma (+1801...), Tate (+1801...)
+     Mode:     GROUP thread (existing: "…" / new via shortcut)  |  INDIVIDUAL 1:1s
+     Failover: fall back to individual sends  |  stop on failure
+     Message:  "Dinner moved to 7"
+
+   Send this message? (yes / edit / cancel)
+   ```
+6. On "yes": `imessage_send_group` (set `fallbackToIndividual` only if authorized in step 4) or `imessage_send_individual`.
+7. Report the `method` from the result honestly: existing thread reused, new group created (save the returned `chatGuid` to Cloud Brain shortcuts if the user wants), or individual fan-out — including any per-recipient failures.
+
 ---
 
 ## ⚠️ Mandatory Safety Rule — New Contact Confirmation
@@ -126,6 +153,7 @@ To send a similar message to multiple recipients:
 2. List every recipient with their per-recipient personalization if requested.
 3. Show all of them at once for approval before sending any.
 4. Send only after "send all" or explicit per-recipient approval.
+5. If the message is identical for everyone, use `imessage_send_individual` (one call, per-recipient results). If personalized per recipient, loop `imessage_send`.
 
 ---
 
@@ -151,6 +179,9 @@ Store: display name, phone or email, and (for group chats) chat GUID. Never stor
 | `imessage_send` errors on AppleScript | Messages.app not open, or user isn't signed in to iMessage | "Open Messages.app and sign in with your iMessage Apple ID, then try again." |
 | `imessage_search_chats` returns empty | Recipient not in chat.db (never texted them from this Mac) | "I can't find a chat with them here. Do you want to send to a specific phone or email?" — if so, use `recipient` in `imessage_send` |
 | `imessage_send` succeeds but user says message never arrived | AppleScript said sent, but iMessage delivery pending. Sometimes shows as SMS if recipient isn't on iMessage. | "Messages says it went out. If they don't respond, it might have gone as SMS — worth a follow-up." |
+| `imessage_send_group` errors: shortcut not installed | Group creation needs the one-time "MBG Group Send" shortcut | "Creating new group threads needs a one-time shortcut install — run `comm-imessage-fast-setup`, or I can send individually instead." |
+| `imessage_send_group` errors: shortcut failed | Shortcuts run failed (permissions prompt, Messages signed out, malformed recipients) | Relay the error. Offer: retry, individual sends, or start the group manually in Messages once (then it's reusable forever). |
+| Group send succeeded but no `chatGuid` returned | New thread hasn't landed in chat.db yet | "The message went out — I'll pick up the thread ID next time. Check Messages to confirm it arrived as a group." |
 
 ---
 

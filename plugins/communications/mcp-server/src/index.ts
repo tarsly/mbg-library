@@ -89,7 +89,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const server = new McpServer({ name: 'comm-imessage-fast', version: '0.1.0' });
+  const server = new McpServer({ name: 'comm-imessage-fast', version: '0.2.0' });
   registerTools(server, chatDb);
 
   const transport = new StdioServerTransport();

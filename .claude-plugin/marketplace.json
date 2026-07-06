@@ -267,7 +267,7 @@
       "displayName": "Communications",
       "source": "./plugins/communications",
       "description": "A complete AI communications toolkit for busy professionals. Triage and organize overflowing inboxes, draft professional emails in your voice, walk into every meeting prepared, extract action items from transcripts, build negotiation strategies on demand, and automatically sync your PLAUD voice recordings to your Cloud Brain. Designed to run as an Executive Inbox Agent on a daily schedule \u2014 so your communications are handled before you even open your laptop.",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "author": {
         "name": "MyBusinessGenie"
       },
