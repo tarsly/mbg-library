@@ -117,8 +117,16 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
         .describe('If the group path fails, send to each recipient as separate 1:1 messages. Only set true with explicit user consent.'),
     },
     async ({ participants, text, fallbackToIndividual }) => {
-      // 1. Existing thread with exactly these people.
-      const existing = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
+      // 1. Existing thread with exactly these people. If chat.db is unreadable
+      // (no Full Disk Access), skip the reuse path — the shortcut can still
+      // create/send without ever touching chat.db.
+      let dbAvailable = true;
+      let existing: ReturnType<typeof chatDb.findChatsByParticipants> = [];
+      try {
+        existing = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
+      } catch {
+        dbAvailable = false;
+      }
       if (existing.length > 0) {
         const target = existing[0];
         await sender.sendMessage(target.chat_guid, text);
@@ -136,17 +144,21 @@ export function registerTools(server: McpServer, chatDb: ChatDb): void {
           await shortcuts.sendGroupViaShortcut(participants, text);
           // Recover the new thread's GUID so future sends can use AppleScript directly.
           let chatGuid: string | null = null;
-          for (let i = 0; i < 5 && !chatGuid; i++) {
-            await shortcuts.sleep(2000);
-            const found = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
-            if (found.length > 0) chatGuid = found[0].chat_guid;
+          if (dbAvailable) {
+            for (let i = 0; i < 5 && !chatGuid; i++) {
+              await shortcuts.sleep(2000);
+              const found = chatDb.findChatsByParticipants(participants).filter((m) => m.match === 'exact');
+              if (found.length > 0) chatGuid = found[0].chat_guid;
+            }
           }
           return jsonResult({
             method: 'shortcut-created-group',
             chatGuid,
             note: chatGuid
               ? 'Group created and message sent. Reuse this chatGuid for future sends.'
-              : 'Shortcut reported success but the new thread has not appeared in chat.db yet — ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID.',
+              : dbAvailable
+                ? 'Shortcut reported success but the new thread has not appeared in chat.db yet — ask the user to confirm delivery in Messages, and use imessage_find_group later to pick up the GUID.'
+                : 'Sent via shortcut. chat.db is unreadable (no Full Disk Access), so an existing thread could not be checked and the new chatGuid could not be recovered — a duplicate thread is possible if one already existed.',
           });
         } catch (err) {
           if (!fallbackToIndividual) {

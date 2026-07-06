@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3';
+import { DatabaseSync } from 'node:sqlite';
 
 export interface ChatDbRow {
   rowid: number;
@@ -38,13 +38,38 @@ export function normalizeHandle(h: string): string {
   return digits.length >= 10 ? digits.slice(-10) : digits;
 }
 
+/**
+ * node:sqlite returns BLOB columns as Uint8Array; body-parser needs Buffer.
+ * Zero-copy wrap at the boundary so downstream code is unchanged.
+ */
+function normalizeRows(rows: unknown[]): ChatDbRow[] {
+  for (const row of rows as Array<{ attributedBody: Uint8Array | Buffer | null }>) {
+    if (row.attributedBody && !Buffer.isBuffer(row.attributedBody)) {
+      const u8 = row.attributedBody;
+      row.attributedBody = Buffer.from(u8.buffer, u8.byteOffset, u8.byteLength);
+    }
+  }
+  return rows as ChatDbRow[];
+}
+
 export class ChatDb {
-  private db: Database.Database | null = null;
+  private db: DatabaseSync | null = null;
+  private unavailableReason: string | null = null;
 
   open(path: string): void {
     const resolved = path.replace(/^~/, process.env.HOME ?? '');
-    this.db = new Database(resolved, { readonly: true });
-    this.db.pragma('journal_mode = WAL');
+    // chat.db is already WAL on every modern macOS; read-only connections must
+    // not attempt to set the journal mode (that's a write).
+    this.db = new DatabaseSync(resolved, { readOnly: true });
+  }
+
+  /**
+   * Mark the db as unusable (e.g. Full Disk Access denied) without killing the
+   * server — send-only tools don't need chat.db. Any db-backed tool call will
+   * then fail with this reason as a per-call error the model can relay.
+   */
+  markUnavailable(reason: string): void {
+    this.unavailableReason = reason;
   }
 
   getMaxRowId(): number {
@@ -60,7 +85,7 @@ export class ChatDb {
     const stmt = this.db!.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me, m.date,
+             m.is_from_me, CAST(m.date AS REAL) AS date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,
@@ -76,7 +101,7 @@ export class ChatDb {
       ORDER BY m.rowid ASC
       LIMIT ?
     `);
-    return stmt.all(sinceRowId, limit) as ChatDbRow[];
+    return normalizeRows(stmt.all(sinceRowId, limit));
   }
 
   fetchChatMessages(chatGuid: string, limit: number): ChatDbRow[] {
@@ -84,7 +109,7 @@ export class ChatDb {
     const stmt = this.db!.prepare(`
       SELECT m.ROWID AS rowid, m.text, m.attributedBody,
              m.cache_has_attachments, m.associated_message_type,
-             m.is_from_me, m.date,
+             m.is_from_me, CAST(m.date AS REAL) AS date,
              h.id AS sender, c.guid AS chat_guid,
              GROUP_CONCAT(a.filename, '||') AS attachment_paths,
              GROUP_CONCAT(a.mime_type, '||') AS attachment_mimes,
@@ -100,7 +125,7 @@ export class ChatDb {
       ORDER BY m.rowid DESC
       LIMIT ?
     `);
-    return stmt.all(chatGuid, limit) as ChatDbRow[];
+    return normalizeRows(stmt.all(chatGuid, limit));
   }
 
   searchChats(query: string, limit: number): ChatSummary[] {
@@ -218,6 +243,9 @@ export class ChatDb {
   }
 
   private ensureOpen(): void {
+    if (this.unavailableReason) {
+      throw new Error(this.unavailableReason);
+    }
     if (!this.db) {
       throw new Error('ChatDb is not open. Call open() first.');
     }

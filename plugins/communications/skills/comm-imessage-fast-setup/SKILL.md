@@ -1,6 +1,6 @@
 ---
 name: comm-imessage-fast-setup
-description: One-time setup for the comm-imessage-fast MCP server. Use this when the user says "set up iMessage", "install iMessage plugin", "iMessage isn't working", "why can't Claude send iMessages", or when ANY imessage_* tool errors with server-not-loaded / dependencies-missing / node-not-found. Also invoke proactively the first time the user tries to use comm-imessage-fast and it fails. Installs Node dependencies for the bundled MCP server, checks Full Disk Access, and verifies the tools come online.
+description: One-time setup for the comm-imessage-fast MCP server. Use this when the user says "set up iMessage", "install iMessage plugin", "iMessage isn't working", "why can't Claude send iMessages", or when ANY imessage_* tool errors with server-not-loaded / dependencies-missing / node-not-found. Also invoke proactively the first time the user tries to use comm-imessage-fast and it fails. Validates the environment for the bundled self-contained MCP server (Node 24+, Full Disk Access, group-send shortcut) and verifies the tools come online — nothing to install.
 ---
 
 # COMM-iMessage-Fast — Setup
@@ -59,21 +59,20 @@ If output is `NODE_MISSING` or the major version is below 20, tell the user:
 
 Stop and wait for the user to install Node. Don't proceed until `node -v` prints a version ≥ 20.
 
-### 3. Run the setup script
+### 3. Run the environment check
 
 ```bash
 cd "$(dirname "$SETUP")" && ./setup.sh
 ```
 
-Expected output ends with `✅ Setup complete.`
+Expected output ends with `✅ Check complete.` As of communications v2.4.0 the server is a single self-contained bundle — the script only validates, it installs nothing.
 
 If the script errors, capture the error and share it with the user. Common failures:
 
 | Error | Fix |
 |---|---|
-| `npm: command not found` | Reinstall Node.js (npm ships with Node) |
-| `EACCES: permission denied` | Check the plugin install dir is writable: `ls -la "$(dirname "$SETUP")"` |
-| Any native build failure on `better-sqlite3` | Install Xcode Command Line Tools: `xcode-select --install` |
+| `Node.js 24+ required` | `brew upgrade node` or install the LTS from nodejs.org |
+| `dist/index.cjs missing` | Reinstall/update the communications plugin (v2.4.0+) |
 
 ### 4. Check Full Disk Access
 
@@ -117,7 +116,7 @@ imessage_search_chats(query=".", limit=1)
 - If it errors — surface the error verbatim. Common causes:
   - `Cannot open ~/Library/Messages/chat.db` → FDA not granted to the process actually running the MCP server. Re-check step 4.
   - `MCP server not connected` → Claude wasn't restarted after `setup.sh`. Ask user to fully quit and reopen Claude.
-  - `Node.js 20+ required` → Node version too old. Redo step 2.
+  - `Node.js 24+ required` → Node version too old. Redo step 2.
 
 ### 6. Optional — install the group-send shortcut
 
@@ -166,4 +165,4 @@ For power users who just want the setup command:
 SETUP=$(find ~/.claude ~/Library/Application\ Support/Claude -path '*/communications/mcp-server/setup.sh' 2>/dev/null | head -1) && [ -n "$SETUP" ] && (cd "$(dirname "$SETUP")" && ./setup.sh)
 ```
 
-Copy-paste, hit enter, grant FDA, restart Claude. Done.
+Copy-paste, hit enter, fix anything it flags, restart Claude. Done.

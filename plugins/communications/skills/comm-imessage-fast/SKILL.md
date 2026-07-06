@@ -22,8 +22,8 @@ Three things must be true on the user's Mac. If any check fails, **invoke the `c
 
 | Requirement | Verify |
 |---|---|
-| The `imessage-fast` MCP server is running | Call `imessage_search_chats` with a harmless query like `.` — if the tool isn't listed or errors with `Dependencies not installed` / `MCP server not connected`, invoke `comm-imessage-fast-setup` |
-| Full Disk Access | If any tool call errors with "authorization denied" or "Cannot open ~/Library/Messages/chat.db", invoke `comm-imessage-fast-setup` |
+| The `imessage-fast` MCP server is running | Call `imessage_search_chats` with a harmless query like `.` — if the tool isn't listed or errors with `Node.js 24+` / `MCP server not connected`, invoke `comm-imessage-fast-setup`. The server is a self-contained bundle — there are no dependencies to install |
+| Full Disk Access (read tools only) | If a READ tool errors with "Cannot open ~/Library/Messages/chat.db", relay the error's FDA fix steps — note that SENDING still works without FDA |
 | Messages.app open + signed in | If `imessage_send` errors mention AppleScript failure, prompt the user to open Messages.app and sign in with their iMessage Apple ID |
 
 **Recovery rule:** whenever an iMessage tool returns an error mentioning dependencies, Node, MCP server, Full Disk Access, or `chat.db` access, hand off to `comm-imessage-fast-setup` and let it drive the fix. Don't retry the failing tool call until setup confirms tools are ready.
@@ -173,9 +173,9 @@ Store: display name, phone or email, and (for group chats) chat GUID. Never stor
 
 | Symptom | Meaning | What to say to the user |
 |---|---|---|
-| Server not present in the MCP tool list | `setup.sh` never ran, or Claude Code hasn't been restarted since install | "The iMessage MCP server isn't loaded. Run the setup script at `<plugin_root>/mcp-server/setup.sh`, then restart Claude Code. If Node isn't installed, run `brew install node` first." |
-| Stderr mentions "Full Disk Access" | Terminal lacks FDA on the chat.db | Surface the exact fix path from the server's stderr message |
-| Stderr mentions "Dependencies not installed" | `node_modules` missing from mcp-server | "Run `<plugin_root>/mcp-server/setup.sh` — this installs Node deps one time." |
+| Server not present in the MCP tool list | Claude hasn't been restarted since plugin install/update, or Node is missing/too old | "Restart Claude fully (Cmd-Q). If it persists, run the environment check at `<plugin_root>/mcp-server/setup.sh` — it verifies Node 24+, the server bundle, FDA, and the group-send shortcut." |
+| Read tool errors mention "Full Disk Access" | The app running Claude lacks FDA (terminal app for CLI, Claude.app for Desktop/Cowork) | Surface the exact fix from the error. Sends still work in the meantime |
+| Error mentions "Node.js 24+" | Node too old for the bundled `node:sqlite` server | "Upgrade Node: `brew upgrade node` (or nodejs.org LTS), then restart Claude." |
 | `imessage_send` errors on AppleScript | Messages.app not open, or user isn't signed in to iMessage | "Open Messages.app and sign in with your iMessage Apple ID, then try again." |
 | `imessage_search_chats` returns empty | Recipient not in chat.db (never texted them from this Mac) | "I can't find a chat with them here. Do you want to send to a specific phone or email?" — if so, use `recipient` in `imessage_send` |
 | `imessage_send` succeeds but user says message never arrived | AppleScript said sent, but iMessage delivery pending. Sometimes shows as SMS if recipient isn't on iMessage. | "Messages says it went out. If they don't respond, it might have gone as SMS — worth a follow-up." |
