@@ -1,16 +1,43 @@
 {
   "name": "real-estate-investor",
   "displayName": "Real Estate Investor",
-  "version": "1.0.1",
-  "description": "Complete real estate investor acquisition toolkit — from first look to signed offer. Covers property research, deal analysis, rental strategy comparison, financial modeling, seller outreach, deal marketing, offer/LOI generation, and contract-to-close due diligence tracking. All skills share a common investor preferences profile so every analysis is calibrated to your buy box from the first run.",
+  "version": "1.0.2",
+  "description": "Complete real estate investor acquisition toolkit \u2014 from first look to signed offer. Covers property research, deal analysis, rental strategy comparison, financial modeling, seller outreach, deal marketing, offer/LOI generation, and contract-to-close due diligence tracking. All skills share a common investor preferences profile so every analysis is calibrated to your buy box from the first run.",
   "author": {
     "name": "MyBusinessGenie"
   },
-  "keywords": ["real-estate", "investing", "deal-analysis", "rental", "cash-flow", "cap-rate", "brrrr", "seller-finance", "subject-to", "creative-finance", "due-diligence", "wholesale", "flip", "property-research"],
+  "keywords": [
+    "real-estate",
+    "investing",
+    "deal-analysis",
+    "rental",
+    "cash-flow",
+    "cap-rate",
+    "brrrr",
+    "seller-finance",
+    "subject-to",
+    "creative-finance",
+    "due-diligence",
+    "wholesale",
+    "flip",
+    "property-research"
+  ],
   "integrates_with": [
-    { "plugin": "investor-profile", "type": "data-sharing" },
-    { "plugin": "prospecting", "type": "data-sharing" },
-    { "plugin": "realtor-toolkit", "type": "see-also" },
-    { "plugin": "tax-and-audit", "type": "see-also" }
+    {
+      "plugin": "investor-profile",
+      "type": "data-sharing"
+    },
+    {
+      "plugin": "prospecting",
+      "type": "data-sharing"
+    },
+    {
+      "plugin": "realtor-toolkit",
+      "type": "see-also"
+    },
+    {
+      "plugin": "tax-and-audit",
+      "type": "see-also"
+    }
   ]
 }

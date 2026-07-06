@@ -1,7 +1,7 @@
 {
   "name": "business-operations",
   "displayName": "Business Operations",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A complete business operations toolkit for small business owners. Covers daily briefings, client onboarding, invoicing, pipeline management, hiring, financial snapshots, SOPs, travel planning, and more. Works across all industries.",
   "author": {
     "name": "MyBusinessGenie"
@@ -32,10 +32,25 @@
     "business operations"
   ],
   "integrates_with": [
-    { "plugin": "communications", "type": "see-also" },
-    { "plugin": "person-brief", "type": "see-also" },
-    { "plugin": "prospecting", "type": "workflow-handoff" },
-    { "plugin": "qbo-bookkeeper", "type": "see-also" },
-    { "plugin": "tax-and-audit", "type": "data-sharing" }
+    {
+      "plugin": "communications",
+      "type": "see-also"
+    },
+    {
+      "plugin": "person-brief",
+      "type": "see-also"
+    },
+    {
+      "plugin": "prospecting",
+      "type": "workflow-handoff"
+    },
+    {
+      "plugin": "qbo-bookkeeper",
+      "type": "see-also"
+    },
+    {
+      "plugin": "tax-and-audit",
+      "type": "data-sharing"
+    }
   ]
 }

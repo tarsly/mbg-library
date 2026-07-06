@@ -1,22 +1,47 @@
 {
   "name": "mbg-admin",
   "displayName": "MBG Admin",
-  "version": "1.1.1",
-  "description": "Ongoing system health for MBG clients. Three admin skills that keep your goals front of mind, your AI platform up to date, and your results visible on your cloud dashboard. Goals Pulse is a 5–10 minute weekly alignment check-in. Update Blueprint checks for and applies platform updates. Publish Dashboard sends any skill output to your mybusinessgenie.ai dashboard.",
+  "version": "1.1.2",
+  "description": "Ongoing system health for MBG clients. Three admin skills that keep your goals front of mind, your AI platform up to date, and your results visible on your cloud dashboard. Goals Pulse is a 5\u201310 minute weekly alignment check-in. Update Blueprint checks for and applies platform updates. Publish Dashboard sends any skill output to your mybusinessgenie.ai dashboard.",
   "author": {
     "name": "MyBusinessGenie"
   },
-  "keywords": ["admin", "maintenance", "goals-pulse", "update-blueprint", "publish-dashboard", "check-in", "weekly-review", "goal-alignment", "platform-update", "system-health", "recurring", "dashboard", "cloud-dashboard"],
+  "keywords": [
+    "admin",
+    "maintenance",
+    "goals-pulse",
+    "update-blueprint",
+    "publish-dashboard",
+    "check-in",
+    "weekly-review",
+    "goal-alignment",
+    "platform-update",
+    "system-health",
+    "recurring",
+    "dashboard",
+    "cloud-dashboard"
+  ],
   "integrates_with": [
-    { "plugin": "ai-agents", "type": "see-also" },
-    { "plugin": "brain-coach", "type": "see-also" },
-    { "plugin": "eos-operator", "type": "see-also" }
+    {
+      "plugin": "ai-agents",
+      "type": "see-also"
+    },
+    {
+      "plugin": "brain-coach",
+      "type": "see-also"
+    },
+    {
+      "plugin": "eos-operator",
+      "type": "see-also"
+    }
   ],
   "connectors": [
     {
       "id": "cloud-dashboard",
       "display_name": "MBG Cloud Dashboard",
-      "required_by": ["publish-dashboard"],
+      "required_by": [
+        "publish-dashboard"
+      ],
       "required": true,
       "description": "Publishes skill output as report cards to the mybusinessgenie.ai web dashboard. Required for Publish Dashboard to function.",
       "setup_url": "https://mybusinessgenie.ai/settings/api-keys",
