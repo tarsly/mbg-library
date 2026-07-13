@@ -1,0 +1,38 @@
+[
+  {
+    "address": "123 Main St, Orlando, FL",
+    "lat": 28.5383,
+    "lon": -81.3792,
+    "price": 950000,
+    "lot_size": 1.8,
+    "zoning": "C-2 General Commercial",
+    "frontage": 120,
+    "aadt": 22000,
+    "score": "green",
+    "notes": "Perfect site. Zoned by right, high traffic, good price."
+  },
+  {
+    "address": "456 Highway 50, Orlando, FL",
+    "lat": 28.5500,
+    "lon": -81.3900,
+    "price": 1050000,
+    "lot_size": 1.5,
+    "zoning": "C-3 Highway Commercial",
+    "frontage": 80,
+    "aadt": 18000,
+    "score": "yellow",
+    "notes": "Borderline price ($1.05M). Otherwise meets all criteria."
+  },
+  {
+    "address": "789 Quiet Rd, Orlando, FL",
+    "lat": 28.5200,
+    "lon": -81.3600,
+    "price": 1200000,
+    "lot_size": 1.2,
+    "zoning": "Residential (Needs Rezoning)",
+    "frontage": 50,
+    "aadt": 8000,
+    "score": "red",
+    "notes": "Fails multiple hard disqualifiers: Price > $1.1M, needs rezoning, low AADT, low frontage."
+  }
+]

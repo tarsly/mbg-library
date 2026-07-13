@@ -1,6 +1,6 @@
 # REInvestor Toolbox
 
-**Plugin version:** 1.0.0
+**Plugin version:** 1.1.0
 **Publisher:** MyBusinessGenie (mybusinessgenie.ai)
 **Category:** Real Estate Investing
 
@@ -56,6 +56,11 @@ Contract-to-close deadline tracker. Enter a close date and contingency periods �
 
 **Trigger phrases:** "we're under contract," "set up contract tracking," "what deadlines are due," "mark inspection complete," "show my open transactions," "what's due this week"
 
+### rei-car-wash-scout *(New)*
+Commercial land acquisition scout for express-tunnel car washes using a creative-finance / zero-down buy box. Screens cities by demographics (population ≥ 30K, median HH income ≥ $50K), discovers qualifying commercial land parcels, scores each against strict site criteria (price, zoning by-right, road frontage, traffic count, lot size), generates a color-coded interactive map (zero-dependency Leaflet — no pip install), and saves the report to cloud brain. Green sites hand off to rei-deal-analyzer and rei-investment-calculator.
+
+**Trigger phrases:** "find car wash land," "research car wash sites," "scout car wash properties," "car wash site scout"
+
 ---
 
 ## Two-Phase Design
@@ -108,4 +113,4 @@ All analysis produced by this plugin is for informational purposes only. Financi
 
 ---
 
-*REInvestor Toolbox | MyBusinessGenie | v1.0.0*
+*REInvestor Toolbox | MyBusinessGenie | v1.1.0*

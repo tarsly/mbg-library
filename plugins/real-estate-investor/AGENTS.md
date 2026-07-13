@@ -11,7 +11,7 @@
 
 **Target users:** Active real estate investors pursuing residential, small multifamily, or creative finance acquisitions (SFR, 2–4 unit, house hacking, BRRRR, sub2, seller finance, wholesale, flip). Investors who are running multiple deals simultaneously or want a systematized acquisition process.
 
-**Plugin version:** 1.0.0 (8 skills at release)
+**Plugin version:** 1.1.0 (9 skills)
 
 ---
 
@@ -151,6 +151,21 @@ Each entry lists: what the skill does, what preferences it collects at activatio
 
 ---
 
+### 9. rei-car-wash-scout
+
+**What it does:** Commercial land acquisition scout for express-tunnel car washes using a creative-finance / zero-down buy box. Runs a demographic gatekeeper (city population ≥ 30K and median household income ≥ $50K), discovers commercial land parcels in the qualifying cities, and scores each against five hard site criteria — price (≤ $1M), zoning permitted by right, road frontage (≥ 65 ft), traffic count (AADT ≥ 12K), and lot size (1.5–2.0 acres). Generates a color-coded interactive map (stdlib-only Leaflet HTML — no pip dependency) and saves the report to cloud brain at `brain/car-wash-scout/{area-slug}-{date}.md`. This is the plugin's commercial-land capability; every other skill targets residential/small-multifamily.
+
+**Preferences collected at activation:**
+- Investor name and company name (for reports)
+- Target markets (state / city / radius)
+- Car wash site criteria overrides (optional — defaults to the standard buy box; saved to `brain/preferences/rei-car-wash-criteria.md`)
+
+**Suggested schedule:** On-demand — triggered when building a Phase 1 target list for a market.
+
+**Natural pairings:** rei-deal-analyzer and rei-investment-calculator (green sites hand off for acquisition modeling), rei-seller-outreach (approach owners of qualifying parcels).
+
+---
+
 ## Preferences Registry
 
 All preferences collectible at investor activation, organized by category. system-04 should take the union of all fields needed by the assigned skills and run one consolidated interview.
@@ -257,6 +272,7 @@ Activation fields: Core Identity, Marketing and Outreach
 | rei-seller-outreach | On-demand | Triggered when reaching out to a seller lead. |
 | rei-deal-marketing | On-demand | Triggered when marketing a deal to buyers or investors. |
 | rei-offer-generator | On-demand | Triggered when ready to make an offer. |
+| rei-car-wash-scout | On-demand | Triggered when building a Phase 1 car wash land target list for a market. |
 
 ---
 
