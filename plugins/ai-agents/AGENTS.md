@@ -21,6 +21,7 @@ This plugin is the foundation of the MBG AI OS. Every other plugin plugs into it
 | `agent-viewer` | "show my agent team", "view my org chart", "who are my agents", "check my team status" | Read-only org chart view with status, tasks, and navigation |
 | `agent-reporter` | "set up reporting for my agents", "get a daily summary from my agents", "agent reporter" | Configures reporting cadences and delivery channels for each active agent |
 | `skill-builder` | "build a custom skill", "create a skill for my agent", "make a skill", "skill builder" | Guides skill creation, testing, iteration, and packaging |
+| `agent-cloud-audit` | "audit my automations", "should this run in the cloud", "is my agent local or cloud", "why didn't my scheduled task fire", "move my cron jobs to the cloud" | Inspects cloud Routines, local session cron, and local-dependent agents; scores each on reliability, compute, remote access, cost, and privacy; migrates approved items to cloud Routines one at a time |
 
 ---
 

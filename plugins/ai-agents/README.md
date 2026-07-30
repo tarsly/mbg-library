@@ -1,6 +1,6 @@
 # AI Agents
 
-**Version 1.0.0** | by MyBusinessGenie
+**Version 1.1.0** | by MyBusinessGenie
 
 Build, activate, and manage a complete AI agent team for your business — from org chart design through live autonomous agents running on schedule.
 
@@ -15,6 +15,7 @@ Build, activate, and manage a complete AI agent team for your business — from 
 | **Agent Viewer** | View your org chart and team status at any time. See which agents are active, what they're running, and what's next. |
 | **Agent Reporter** | Configure automated reporting for each active agent — what they report, how often, and where it goes (dashboard, email, iMessage, or in chat). |
 | **Skill Builder** | Build custom skills for tasks no existing plugin covers. Guides you through intent capture, drafting, testing, and packaging. |
+| **Cloud Migration Audit** | Health-check every automation you have. Shows which scheduled tasks actually run in the cloud vs. only on your machine, scores each one, and migrates the ones worth moving — with your approval, one at a time. |
 
 ---
 
@@ -45,6 +46,9 @@ Run **Agent Reporter** to configure each active agent's reporting cadence — da
 ### Step 4 — Check in anytime
 Run **Agent Viewer** to see your org chart, team status, and what's running.
 
+### Step 5 — Verify it's actually running
+Run **Cloud Migration Audit** to confirm your agents' scheduled tasks fire in the cloud — not just inside a session that ends when you close your laptop. Good to run right after activating an agent, and periodically after that.
+
 ---
 
 ## Tool Selection: How Agent Activator Chooses Tools
@@ -74,6 +78,11 @@ Agent Activator follows a specific decision order to find the best tool for each
 - **Update reporting:** Run Agent Reporter anytime to change cadences or delivery channels.
 
 ---
+
+## What's New in v1.1.0
+
+- **New skill: Cloud Migration Audit** — audits cloud Routines, local session cron jobs, and local-dependent agents; scores each on reliability, compute, remote access, cost, and privacy; migrates approved items to cloud Routines one at a time with explicit per-item approval
+- Catches the most common silent failure: a "scheduled" task that was really a session-bound local cron job and died with the session
 
 ## What's New in v1.0.0
 
